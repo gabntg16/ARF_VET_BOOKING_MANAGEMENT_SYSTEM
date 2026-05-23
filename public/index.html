@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARF — Animal Relief Facility · Veterinary Clinic</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --cream:#faf7f2;--warm:#fffdf9;--sage:#4a7c59;--sage-l:#6b9b76;
+      --sage-d:#35604a;--amber:#c8763a;--amber-l:#f0e4d4;
+      --ink:#1e2a22;--mid:#4d5c52;--muted:#7a8c82;--border:#dde7e0;
+      --sh-sm:0 2px 8px rgba(30,42,34,.07);
+      --sh-md:0 8px 32px rgba(30,42,34,.12);
+      --sh-lg:0 24px 64px rgba(30,42,34,.16);
+      --r:14px;--rl:24px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:100;background:rgba(250,247,242,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;height:68px}
+    .nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+    .nav-logo-mark{width:38px;height:38px;background:var(--sage);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    .nav-logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);line-height:1}
+    .nav-logo-sub{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.9rem;font-weight:500;color:var(--mid);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--sage)}
+    .nav-cta{background:var(--sage)!important;color:#fff!important;padding:.55rem 1.25rem!important;border-radius:999px!important;transition:background .2s,transform .15s!important}
+    .nav-cta:hover{background:var(--sage-d)!important;transform:translateY(-1px)!important}
+
+    /* HERO */
+    .hero{min-height:calc(100vh - 68px);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:5rem clamp(1.5rem,5vw,4rem);max-width:1280px;margin:0 auto}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:var(--amber-l);border:1px solid rgba(200,118,58,.25);border-radius:999px;padding:.35rem .85rem;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;animation:fadeUp .6s ease both}
+    .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.1;margin-bottom:1.5rem;animation:fadeUp .6s .1s ease both}
+    .hero-title em{font-style:italic;color:var(--sage)}
+    .hero-body{font-size:1.1rem;color:var(--mid);max-width:480px;line-height:1.75;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both}
+    .hero-actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+    .btn-p{display:inline-flex;align-items:center;gap:.5rem;background:var(--sage);color:#fff;padding:.9rem 2rem;border-radius:999px;font-size:.95rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s}
+    .btn-p:hover{background:var(--sage-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,124,89,.35)}
+    .btn-g{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--ink);padding:.9rem 1.75rem;border-radius:999px;font-size:.95rem;font-weight:500;text-decoration:none;border:1.5px solid var(--border);cursor:pointer;transition:border-color .2s,background .2s}
+    .btn-g:hover{border-color:var(--sage);background:rgba(74,124,89,.06)}
+    .hero-trust{display:flex;align-items:center;gap:1.5rem;margin-top:2rem;animation:fadeUp .6s .4s ease both}
+    .trust-i{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);font-weight:500}
+    .hero-visual{position:relative;animation:fadeUp .7s .15s ease both}
+    .hero-img-wrap{border-radius:var(--rl);overflow:hidden;aspect-ratio:4/5;box-shadow:var(--sh-lg)}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;animation:slowZoom 12s ease-in-out infinite alternate}
+    @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.04)}}
+    .badge{position:absolute;bottom:2rem;left:-1.5rem;background:var(--warm);border-radius:var(--r);padding:1rem 1.25rem;box-shadow:var(--sh-md);border:1px solid var(--border);display:flex;align-items:center;gap:.75rem;min-width:200px;animation:floatA 4s ease-in-out infinite}
+    @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .badge-icon{width:42px;height:42px;background:#e8f5ee;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .badge-lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+    .badge-val{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);line-height:1}
+    .badge2{position:absolute;top:1.5rem;right:-1.5rem;background:var(--sage);border-radius:var(--r);padding:.85rem 1.1rem;box-shadow:var(--sh-md);color:#fff;text-align:center;animation:floatA 4.5s 1s ease-in-out infinite}
+    .badge2-val{font-family:'DM Serif Display',serif;font-size:1.6rem}
+    .badge2-lbl{font-size:.68rem;opacity:.85;font-weight:500}
+
+    /* SECTIONS */
+    section{padding:6rem clamp(1.5rem,5vw,4rem)}
+    .si{max-width:1280px;margin:0 auto}
+    .stag{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--sage);margin-bottom:1rem}
+    .stag::before{content:'';display:block;width:20px;height:2px;background:var(--sage);border-radius:2px}
+    .stitle{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);color:var(--ink);line-height:1.2;margin-bottom:1.25rem}
+
+    /* SERVICES */
+    #services{background:var(--warm)}
+    .svc-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;gap:2rem}
+    .svc-desc{max-width:440px;color:var(--mid);line-height:1.7;font-size:1.05rem}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+    .svc-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:2rem 1.75rem;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:default;position:relative;overflow:hidden}
+    .svc-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--sage);border-radius:0 2px 2px 0;transition:height .25s ease}
+    .svc-card:hover{border-color:var(--sage-l);box-shadow:var(--sh-md);transform:translateY(-4px)}
+    .svc-card:hover::before{height:100%}
+    .svc-icon{width:52px;height:52px;background:var(--amber-l);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;transition:transform .2s}
+    .svc-card:hover .svc-icon{transform:scale(1.1)}
+    .svc-name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);margin-bottom:.5rem}
+    .svc-desc2{font-size:.875rem;color:var(--muted);line-height:1.65}
+    .svc-arrow{display:inline-flex;align-items:center;gap:.35rem;margin-top:1rem;font-size:.82rem;font-weight:600;color:var(--sage);opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s}
+    .svc-card:hover .svc-arrow{opacity:1;transform:translateX(0)}
+
+    /* ABOUT */
+    #about{background:var(--ink);color:#fff}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .about-img-wrap{border-radius:var(--rl);overflow:hidden;aspect-ratio:5/6;box-shadow:var(--sh-lg);position:relative}
+    .about-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .about-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,42,34,.6) 0%,transparent 50%)}
+    .about-caption{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem}
+    .about-caption p{font-size:.9rem;font-style:italic;color:rgba(255,255,255,.85);font-family:'DM Serif Display',serif}
+    .atag{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--sage-l);margin-bottom:1rem;display:flex;align-items:center;gap:.4rem}
+    .atag::before{content:'';display:block;width:20px;height:2px;background:var(--sage-l)}
+    .atitle{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3vw,2.6rem);line-height:1.2;margin-bottom:1.5rem}
+    .atitle em{font-style:italic;color:var(--sage-l)}
+    .abody{color:rgba(255,255,255,.7);line-height:1.8;font-size:1rem;margin-bottom:2.5rem}
+    .astats{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2.5rem}
+    .astat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:1.25rem}
+    .astat-val{font-family:'DM Serif Display',serif;font-size:2.2rem;color:#fff;line-height:1}
+    .astat-lbl{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+
+    /* TIPS */
+    #tips{background:var(--cream)}
+    .tips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+    .tip-card{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;transition:box-shadow .2s,transform .2s}
+    .tip-card:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+    .tip-num{font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;color:var(--sage);letter-spacing:.1em;margin-bottom:.75rem}
+    .tip-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.65rem}
+    .tip-body{font-size:.875rem;color:var(--muted);line-height:1.65}
+
+    /* AUTH */
+    #auth{background:linear-gradient(135deg,var(--sage-d) 0%,var(--sage) 100%)}
+    .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .auth-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3vw,2.8rem);color:#fff;line-height:1.2;margin-bottom:1.25rem}
+    .auth-body{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.75;margin-bottom:2rem}
+    .auth-feats{display:flex;flex-direction:column;gap:.75rem}
+    .auth-feat{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:rgba(255,255,255,.8)}
+    .auth-feat-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .login-card{background:var(--warm);border-radius:var(--rl);padding:2.5rem;box-shadow:var(--sh-lg)}
+    .lc-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--ink);margin-bottom:.3rem}
+    .lc-sub{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+    .booking-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 .85rem}
+    .booking-form-grid .full{grid-column:1/-1}
+    .fl{display:block;font-size:.78rem;font-weight:600;color:var(--ink);margin-bottom:.4rem;letter-spacing:.03em}
+    .fi,.fs,.fta{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--ink);background:var(--cream);transition:border-color .2s,box-shadow .2s;margin-bottom:1.1rem}
+    .fi:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(74,124,89,.12);background:#fff}
+    .fs:focus,.fta:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(74,124,89,.12);background:#fff}
+    .fi::placeholder,.fta::placeholder{color:#b4c4bb}
+    .fta{min-height:84px;resize:vertical}
+    .forgot{text-align:right;margin-top:-.7rem;margin-bottom:1.5rem}
+    .forgot a{font-size:.78rem;color:var(--sage);text-decoration:none;font-weight:600}
+    .btn-login{width:100%;padding:.9rem;background:var(--sage);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,transform .15s}
+    .btn-login:hover{background:var(--sage-d);transform:translateY(-1px)}
+    #alert{margin-top:1rem;padding:.75rem 1rem;border-radius:8px;font-size:.875rem;font-weight:500;display:none}
+    #alert.show{display:block}
+    #alert.alert-error{background:#fef2f0;color:#c0392b;border:1px solid #f5c6c6}
+    #alert.alert-success{background:#f0f9f4;color:#2d6a4f;border:1px solid #b7d9c8}
+
+    /* FOOTER */
+    footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.5rem clamp(1.5rem,5vw,4rem)}
+    .fi2{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .fbrand{display:flex;align-items:center;gap:.6rem}
+    .fdot{width:8px;height:8px;background:var(--sage-l);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+    .fbrand span{font-family:'DM Serif Display',serif;font-size:1rem;color:rgba(255,255,255,.85)}
+    .flinks{display:flex;gap:2rem;list-style:none}
+    .flinks a{font-size:.8rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+    .flinks a:hover{color:rgba(255,255,255,.8)}
+
+    /* ANIMS */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.in{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .hero,.about-grid,.auth-grid{grid-template-columns:1fr;gap:2.5rem}
+      .hero-visual{order:-1}
+      .badge,.badge2{display:none}
+      .hero-img-wrap{aspect-ratio:4/3}
+      .svc-grid,.tips-grid{grid-template-columns:1fr 1fr}
+      .svc-hd{flex-direction:column}
+      .nav-links{display:none}
+    }
+    @media(max-width:560px){
+      .svc-grid,.tips-grid{grid-template-columns:1fr}
+      .astats{grid-template-columns:1fr 1fr}
+      .booking-form-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">🐾</div>
+    <div>
+      <div class="nav-logo-text">ARF</div>
+      <div class="nav-logo-sub">Animal Relief Facility</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#tips">Pet Tips</a></li>
+    <li><a href="#auth" class="nav-cta">Book Appointment</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section style="padding:0">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">🩺 Veterinary Clinic · Est. 2015</div>
+      <h1 class="hero-title">Expert care for<br/>every <em>furry</em><br/>family member</h1>
+      <p class="hero-body">ARF provides compassionate, professional veterinary care for cats, dogs, and small animals. Real-time booking, specialist consultations, and a team that treats your pet like family.</p>
+      <div class="hero-actions">
+        <a href="#auth" class="btn-p">📅 Book Appointment</a>
+        <a href="#about" class="btn-g">Learn More →</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-i">✅ Certified Vets</div>
+        <div class="trust-i">🕗 Mon–Sat 8am–6pm</div>
+        <div class="trust-i">📍 Calamba</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=900&q=80" alt="Veterinarian with dog" loading="eager"/>
+      </div>
+      <div class="badge">
+        <div class="badge-icon">🐶</div>
+        <div>
+          <div class="badge-lbl">Patients Treated</div>
+          <div class="badge-val">1,400+</div>
+        </div>
+      </div>
+      <div class="badge2">
+        <div class="badge2-val">4.9 ★</div>
+        <div class="badge2-lbl">Client Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="si">
+    <div class="svc-hd reveal">
+      <div>
+        <div class="stag">Our Services</div>
+        <h2 class="stitle">Complete care under<br/>one roof</h2>
+      </div>
+      <p class="svc-desc">From routine checkups to complex surgeries, our board-certified veterinarians have the expertise your pet deserves.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal" style="transition-delay:.05s">
+        <div class="svc-icon">🩺</div>
+        <div class="svc-name">Wellness Checkups</div>
+        <p class="svc-desc2">Annual and bi-annual exams to keep your pet in peak health with full physical assessments.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.1s">
+        <div class="svc-icon">💉</div>
+        <div class="svc-name">Vaccinations</div>
+        <p class="svc-desc2">Core and non-core vaccines tailored to your pet's lifestyle, age, and risk factors.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.15s">
+        <div class="svc-icon">✂️</div>
+        <div class="svc-name">Grooming</div>
+        <p class="svc-desc2">Full-service grooming including baths, trims, nail clipping, and ear cleaning.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.2s">
+        <div class="svc-icon">🦷</div>
+        <div class="svc-name">Dental Care</div>
+        <p class="svc-desc2">Professional dental cleanings, extractions, and oral health assessments.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.25s">
+        <div class="svc-icon">🔬</div>
+        <div class="svc-name">Surgery</div>
+        <p class="svc-desc2">Soft-tissue surgeries including spay/neuter procedures with full anesthetic monitoring.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:.3s">
+        <div class="svc-icon">🚨</div>
+        <div class="svc-name">Emergency Care</div>
+        <p class="svc-desc2">Urgent triage and stabilization during clinic hours for acute illness or trauma.</p>
+        <div class="svc-arrow">Schedule →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1559190394-df5a28aab5c5?auto=format&fit=crop&w=800&q=80" alt="ARF vet team" loading="lazy"/>
+        <div class="about-overlay"></div>
+        <div class="about-caption"><p>"We treat every patient as if they were our own."</p></div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="atag">About ARF</div>
+        <h2 class="atitle">Passionate about<br/><em>animal well-being</em><br/>since day one</h2>
+        <p class="abody">ARF — Animal Relief Facility was founded with a single mission: provide every pet with attentive, evidence-based care. Our licensed veterinarians and trained technicians work together to ensure your animal companion receives thorough, compassionate treatment in a calm and welcoming environment.</p>
+        <div class="astats">
+          <div class="astat"><div class="astat-val">1,400+</div><div class="astat-lbl">Pets treated annually</div></div>
+          <div class="astat"><div class="astat-val">10+</div><div class="astat-lbl">Years of experience</div></div>
+          <div class="astat"><div class="astat-val">4</div><div class="astat-lbl">Certified veterinarians</div></div>
+          <div class="astat"><div class="astat-val">6</div><div class="astat-lbl">Core services offered</div></div>
+        </div>
+        <a href="#auth" class="btn-p">→ Book a Visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="si">
+    <div class="reveal" style="max-width:560px;margin-bottom:.5rem">
+      <div class="stag">Pet Care Tips</div>
+      <h2 class="stitle">Keep your companion<br/>happy and healthy</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card reveal" style="transition-delay:.05s">
+        <div class="tip-num">01</div>
+        <div class="tip-title">Regular Checkups</div>
+        <p class="tip-body">Schedule routine exams every 6–12 months to catch health issues early and keep vaccinations current.</p>
+      </div>
+      <div class="tip-card reveal" style="transition-delay:.1s">
+        <div class="tip-num">02</div>
+        <div class="tip-title">Balanced Nutrition</div>
+        <p class="tip-body">Choose age-appropriate food for your pet's breed and life stage. Ask your vet for a personalized dietary plan.</p>
+      </div>
+      <div class="tip-card reveal" style="transition-delay:.15s">
+        <div class="tip-num">03</div>
+        <div class="tip-title">Vaccine Schedule</div>
+        <p class="tip-body">Keep booster shots on schedule to maintain immunity against common and serious diseases.</p>
+      </div>
+      <div class="tip-card reveal" style="transition-delay:.2s">
+        <div class="tip-num">04</div>
+        <div class="tip-title">Daily Activity</div>
+        <p class="tip-body">Regular exercise and mental enrichment supports physical health and emotional well-being for all pets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTH -->
+<section id="auth">
+  <div class="si">
+    <div class="auth-grid">
+      <div class="reveal">
+        <div class="atag" style="color:rgba(255,255,255,.7)">Online Booking</div>
+        <h2 class="auth-title">Book a visit<br/>without waiting<br/>in line</h2>
+        <p class="auth-body">Send an appointment request online. The clinic team will review your preferred schedule and confirm the visit.</p>
+        <div class="auth-feats">
+          <div class="auth-feat"><div class="auth-feat-icon">📅</div><div>Choose your preferred date and time</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon">🩺</div><div>Select the service your pet needs</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon">🔔</div><div>Clinic staff can confirm or update the request</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon">📋</div><div>Your request appears in the admin appointment list</div></div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="login-card">
+          <h3 class="lc-title">Request an appointment</h3>
+          <p class="lc-sub">Fill in your pet and preferred schedule. No clinic visit is needed just to book.</p>
+          <div class="booking-form-grid">
+            <div>
+              <label class="fl" for="booking-owner">Owner name *</label>
+              <input id="booking-owner" class="fi" type="text" placeholder="Maria Santos" autocomplete="name"/>
+            </div>
+            <div>
+              <label class="fl" for="booking-phone">Phone number *</label>
+              <input id="booking-phone" class="fi" type="tel" placeholder="+63 912 345 6789" autocomplete="tel"/>
+            </div>
+            <div>
+              <label class="fl" for="booking-email">Email</label>
+              <input id="booking-email" class="fi" type="email" placeholder="name@email.com" autocomplete="email"/>
+            </div>
+            <div>
+              <label class="fl" for="booking-pet">Pet name *</label>
+              <input id="booking-pet" class="fi" type="text" placeholder="Buddy"/>
+            </div>
+            <div>
+              <label class="fl" for="booking-species">Pet type</label>
+              <select id="booking-species" class="fs">
+                <option>Dog</option>
+                <option>Cat</option>
+                <option>Bird</option>
+                <option>Rabbit</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="booking-service">Service *</label>
+              <select id="booking-service" class="fs">
+                <option>General Checkup</option>
+                <option>Vaccination</option>
+                <option>Dental Cleaning</option>
+                <option>Grooming</option>
+                <option>Deworming</option>
+                <option>Surgery Consultation</option>
+                <option>Emergency</option>
+              </select>
+            </div>
+            <div>
+              <label class="fl" for="booking-date">Preferred date *</label>
+              <input id="booking-date" class="fi" type="date"/>
+            </div>
+            <div>
+              <label class="fl" for="booking-time">Preferred time *</label>
+              <select id="booking-time" class="fs">
+                <option>9:00 AM</option>
+                <option>9:30 AM</option>
+                <option>10:00 AM</option>
+                <option>10:30 AM</option>
+                <option>11:00 AM</option>
+                <option>2:00 PM</option>
+                <option>2:30 PM</option>
+                <option>3:00 PM</option>
+                <option>3:30 PM</option>
+                <option>4:00 PM</option>
+              </select>
+            </div>
+            <div class="full">
+              <label class="fl" for="booking-notes">Notes or symptoms</label>
+              <textarea id="booking-notes" class="fta" placeholder="Tell us what your pet needs help with."></textarea>
+            </div>
+          </div>
+          <button class="btn-login" onclick="submitPublicBooking()">Send Appointment Request →</button>
+          <p id="booking-alert" class="alert"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi2">
+    <div class="fbrand"><div class="fdot"></div><span>ARF — Animal Relief Facility</span></div>
+    <ul class="flinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tips">Tips</a></li>
+      <li><a href="#auth">Portal</a></li>
+      <li><a href="staff-login.html">Staff sign in</a></li>
+    </ul>
+    <small>© 2026 ARF Veterinary Clinic · Pet care done with love 🐾</small>
+  </div>
+</footer>
+
+<script src="assets/js/database.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+  function showBookingAlert(message, type = 'error') {
+    const alert = document.getElementById('booking-alert');
+    if (!alert) return;
+    alert.textContent = message;
+    alert.className = `alert show alert-${type}`;
+    setTimeout(() => alert.classList.remove('show'), 5000);
+  }
+
+  async function submitPublicBooking() {
+    const owner = document.getElementById('booking-owner').value.trim();
+    const phone = document.getElementById('booking-phone').value.trim();
+    const email = document.getElementById('booking-email').value.trim();
+    const pet = document.getElementById('booking-pet').value.trim();
+    const species = document.getElementById('booking-species').value;
+    const service = document.getElementById('booking-service').value;
+    const date = document.getElementById('booking-date').value;
+    const time = document.getElementById('booking-time').value;
+    const notes = document.getElementById('booking-notes').value.trim();
+
+    if (!owner || !phone || !pet || !date || !time) {
+      showBookingAlert('Please complete the required fields.');
+      return;
+    }
+
+    const emojiBySpecies = {
+      Dog: '🐶',
+      Cat: '🐱',
+      Bird: '🐦',
+      Rabbit: '🐰',
+      Other: '🐾'
+    };
+
+    const result = await createAppointmentInDB({
+      pet,
+      emoji: emojiBySpecies[species] || '🐾',
+      owner,
+      phone,
+      service,
+      date,
+      time,
+      vet: 'Any available veterinarian',
+      status: 'Pending',
+      notes,
+      clientEmail: email || null
+    });
+
+    if (!result.success) {
+      showBookingAlert(result.message || 'We could not send your request. Please try again.');
+      return;
+    }
+
+    ['booking-owner', 'booking-phone', 'booking-email', 'booking-pet', 'booking-notes'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('booking-date').value = '';
+    showBookingAlert('Appointment request sent. The clinic will confirm your schedule.', 'success');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.getElementById('booking-date').min = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>

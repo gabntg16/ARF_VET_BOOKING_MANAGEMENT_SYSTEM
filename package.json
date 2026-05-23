@@ -1,0 +1,17 @@
+{
+  "name": "arf-vet-backend",
+  "version": "1.0.0",
+  "description": "Deployable booking and clinic management app for ARF Veterinary Clinic",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "health": "node -e \"fetch('http://localhost:'+(process.env.API_PORT||3000)+'/api/health').then(r=>r.json()).then(console.log)\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.4.3"
+  }
+}
