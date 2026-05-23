@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Account — ARF Clinic</title>
+  <title>My Account - ARF Clinic</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/arf-styles.css"/>
   <style>
@@ -144,7 +144,17 @@
       color: var(--text);
     }
     .booking-emoji {
-      font-size: 1.5rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--green);
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       margin-right: 0.5rem;
     }
     .booking-status {
@@ -196,7 +206,7 @@
 <div class="dashboard-header">
   <div class="header-container">
     <div>
-      <div class="dashboard-title">🐾 My Account</div>
+      <div class="dashboard-title">My Account</div>
       <div class="dashboard-subtitle" id="client-name">Loading...</div>
     </div>
     <button class="logout-btn" onclick="logout()">Logout</button>
@@ -210,46 +220,46 @@
     
     <div class="status-row">
       <span class="status-label">Pet Name</span>
-      <span class="status-value" id="pet-name">—</span>
+      <span class="status-value" id="pet-name">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Owner</span>
-      <span class="status-value" id="account-owner">—</span>
+      <span class="status-value" id="account-owner">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Email</span>
-      <span class="status-value" id="account-email">—</span>
+      <span class="status-value" id="account-email">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Phone</span>
-      <span class="status-value" id="account-phone">—</span>
+      <span class="status-value" id="account-phone">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Account Created</span>
-      <span class="status-value" id="account-created">—</span>
+      <span class="status-value" id="account-created">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Account Status</span>
-      <span class="status-value" id="account-status">—</span>
+      <span class="status-value" id="account-status">-</span>
     </div>
     
     <div class="status-row">
       <span class="status-label">Expiry Date</span>
-      <span class="status-value" id="account-expiry">—</span>
+      <span class="status-value" id="account-expiry">-</span>
     </div>
   </div>
 
   <!-- MY BOOKINGS -->
   <div class="section">
-    <div class="section-title">📅 My Bookings</div>
+    <div class="section-title">My Bookings</div>
     <div id="bookings-list">
       <div class="empty-state">
-        <div class="empty-state-icon">📭</div>
+          <div class="empty-state-icon">--</div>
         <p>No bookings yet</p>
       </div>
     </div>
@@ -257,22 +267,22 @@
 
   <!-- CONTACT INFO -->
   <div class="section">
-    <div class="section-title">📞 Contact Info</div>
+    <div class="section-title">Contact Info</div>
     <div class="contact-info">
       <div class="contact-info-row">
         <strong>ARF Veterinary Clinic</strong>
         <span></span>
       </div>
       <div class="contact-info-row">
-        <span>📞 Phone:</span>
+        <span>Phone:</span>
         <span>(555) 123-4567</span>
       </div>
       <div class="contact-info-row">
-        <span>📧 Email:</span>
+        <span>Email:</span>
         <span>info@arf-clinic.com</span>
       </div>
       <div class="contact-info-row">
-        <span>⏰ Hours:</span>
+        <span>Hours:</span>
         <span>Mon-Fri: 9 AM - 6 PM</span>
       </div>
     </div>
@@ -282,9 +292,7 @@
 <script src="assets/js/database.js"></script>
 <script src="assets/js/auth.js"></script>
 <script>
-// ═══════════════════════════════════════════
 //  CLIENT DASHBOARD
-// ═══════════════════════════════════════════
 
 // Check authentication
 const currentClient = checkAuth('client');
@@ -292,11 +300,11 @@ const currentClient = checkAuth('client');
 if (currentClient) {
   // Load client data
   document.getElementById('client-name').textContent = currentClient.owner || 'Client';
-  document.getElementById('pet-name').textContent = currentClient.petName || '—';
-  document.getElementById('account-owner').textContent = currentClient.owner || '—';
+  document.getElementById('pet-name').textContent = currentClient.petName || '-';
+  document.getElementById('account-owner').textContent = currentClient.owner || '-';
   document.getElementById('account-email').textContent = currentClient.email;
-  document.getElementById('account-phone').textContent = currentClient.phone || '—';
-  document.getElementById('account-created').textContent = currentClient.createdDate || '—';
+  document.getElementById('account-phone').textContent = currentClient.phone || '-';
+  document.getElementById('account-created').textContent = currentClient.createdDate || '-';
 
   // Account status & expiry
   if (currentClient.expiryDate) {
@@ -328,7 +336,7 @@ function renderBookings(clientEmail) {
     if (appointments.length === 0) {
       bookingsList.innerHTML = `
         <div class="empty-state">
-          <div class="empty-state-icon">📭</div>
+          <div class="empty-state-icon">--</div>
           <p>No bookings yet</p>
         </div>
       `;
@@ -346,7 +354,7 @@ function renderBookings(clientEmail) {
     <div class="booking-card" style="border-left-color: ${(statusConfig[a.status] || {border:'#ddd'}).border}">
       <div class="booking-header">
         <div>
-          <span class="booking-emoji" style="background:#fff; border-radius:50%; padding:5px; box-shadow:0 2px 4px rgba(0,0,0,0.1); margin-right:10px;">${a.emoji}</span>
+          <span class="booking-emoji">PT</span>
           <span class="booking-pet" style="font-size:1.1rem">${a.pet}</span>
         </div>
         <span class="booking-status badge ${statusConfig[a.status]?.class || 'badge-grey'}">${a.status}</span>

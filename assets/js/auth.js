@@ -1,6 +1,4 @@
-// ═══════════════════════════════════════════
 //  AUTH SYSTEM - REST API Integration
-// ═══════════════════════════════════════════
 
 // Initialize data from the API or defaults
 async function initAuthData() {
@@ -11,12 +9,12 @@ async function initAuthData() {
       // Initialize default admin settings
       await saveAdminSettingsInDB({
         adminPassword: 'admin123',
-        clinicName: 'ARF — Animal Relief Facility',
+        clinicName: 'ARF - Animal Relief Facility',
         clinicPhone: '+63 2 8123 4567'
       });
     }
   } catch (error) {
-    console.warn('⚠️ Backend API not ready yet:', error);
+    console.warn('Backend API not ready yet:', error);
   }
 }
 
@@ -28,9 +26,7 @@ function showAlert(msg, type = 'error') {
   setTimeout(() => alert.classList.remove('show'), 4000);
 }
 
-// ═══════════════════════════════════════════
 //  CLIENT LOGIN
-// ═══════════════════════════════════════════
 async function clientLogin() {
   const email = document.getElementById('client-email').value.trim();
   const password = document.getElementById('client-password').value;
@@ -44,7 +40,7 @@ async function clientLogin() {
     const client = await getClientFromDB(email);
 
     if (!client || client.password !== password) {
-      showAlert('❌ Invalid email or password');
+      showAlert('Invalid email or password');
       return;
     }
 
@@ -52,7 +48,7 @@ async function clientLogin() {
     if (client.expiryDate) {
       const today = new Date().toISOString().split('T')[0];
       if (today > client.expiryDate) {
-        showAlert('❌ Your account has expired. Please contact ARF Clinic.');
+        showAlert('Your account has expired. Please contact ARF Clinic.');
         return;
       }
     }
@@ -60,19 +56,17 @@ async function clientLogin() {
     // Login successful
     sessionStorage.setItem('current_user', JSON.stringify(client));
     sessionStorage.setItem('user_role', 'client');
-    showAlert('✅ Login successful! Redirecting...', 'success');
+    showAlert('Login successful! Redirecting...', 'success');
     setTimeout(() => {
       window.location.href = 'client-dashboard.html';
     }, 1000);
   } catch (error) {
     console.error('Login error:', error);
-    showAlert('❌ An error occurred. Please try again.');
+    showAlert('An error occurred. Please try again.');
   }
 }
 
-// ═══════════════════════════════════════════
 //  ADMIN LOGIN
-// ═══════════════════════════════════════════
 async function adminLogin(password) {
   const pwd = password ?? document.getElementById('admin-password')?.value ?? document.getElementById('unified-password')?.value;
 
@@ -86,19 +80,19 @@ async function adminLogin(password) {
     const adminPassword = settings?.adminPassword || 'admin123';
 
     if (pwd !== adminPassword) {
-      showAlert('❌ Invalid admin password');
+      showAlert('Invalid admin password');
       return false;
     }
 
     sessionStorage.setItem('user_role', 'admin');
-    showAlert('✅ Admin login successful! Redirecting...', 'success');
+    showAlert('Admin login successful! Redirecting...', 'success');
     setTimeout(() => {
       window.location.href = 'vet-booking-app.html';
     }, 1000);
     return true;
   } catch (error) {
     console.error('Admin login error:', error);
-    showAlert('❌ An error occurred. Please try again.');
+    showAlert('An error occurred. Please try again.');
     return false;
   }
 }
@@ -126,28 +120,28 @@ async function unifiedLogin() {
     if (!client || client.password !== password) {
       if (adminIdentifiers.includes(email)) {
         // admin email + wrong admin password already handled above
-        showAlert('❌ Invalid admin credentials');
+        showAlert('Invalid admin credentials');
       } else {
-        showAlert('❌ Invalid email or password');
+        showAlert('Invalid email or password');
       }
       return;
     }
 
     const today = new Date().toISOString().split('T')[0];
     if (client.expiryDate && today > client.expiryDate) {
-      showAlert('❌ Your account has expired. Please contact ARF Clinic.');
+      showAlert('Your account has expired. Please contact ARF Clinic.');
       return;
     }
 
     sessionStorage.setItem('current_user', JSON.stringify(client));
     sessionStorage.setItem('user_role', 'client');
-    showAlert('✅ Login successful! Redirecting...', 'success');
+    showAlert('Login successful! Redirecting...', 'success');
     setTimeout(() => {
       window.location.href = 'client-dashboard.html';
     }, 1000);
   } catch (error) {
     console.error('Login error:', error);
-    showAlert('❌ An error occurred. Please try again.');
+    showAlert('An error occurred. Please try again.');
   }
 }
 
@@ -162,9 +156,7 @@ function handleForgotPassword() {
   showAlert('Please contact ARF Clinic at +63 2 8123 4567 to verify your identity and request a password reset.', 'success');
 }
 
-// ═══════════════════════════════════════════
 //  PROTECT PAGES
-// ═══════════════════════════════════════════
 function checkAuth(requiredRole = null) {
   const userRole = sessionStorage.getItem('user_role');
   const currentUser = sessionStorage.getItem('current_user');
@@ -193,9 +185,7 @@ function logout() {
   window.location.href = redirectPath;
 }
 
-// ═══════════════════════════════════════════
 //  CLIENT ACCOUNT MANAGEMENT - REST API
-// ═══════════════════════════════════════════
 async function createClientAccount(email, password, petName, owner, phone, expiryDate = null) {
   try {
     return await createClientInDB(email, password, petName, owner, phone, expiryDate);
@@ -241,9 +231,7 @@ async function deleteClient(email) {
   }
 }
 
-// ═══════════════════════════════════════════
 //  APPOINTMENTS - REST API
-// ═══════════════════════════════════════════
 async function getClientBookings(clientEmail) {
   try {
     return await getClientAppointmentsFromDB(clientEmail);
@@ -260,14 +248,14 @@ async function initAppointmentsData() {
       await loadDefaultAppointments();
     }
   } catch (error) {
-    console.warn('⚠️ Could not initialize appointments:', error);
+    console.warn('Could not initialize appointments:', error);
   }
 }
 
 async function loadDefaultAppointments() {
   const defaultAppointments = [
-    { pet:'Buddy', emoji:'🐶', owner:'Maria Santos', phone:'0917-123-4567', service:'General Checkup', date:'2026-03-25', time:'9:00 AM', vet:'Dr. Reyes', status:'Confirmed', notes:'', clientEmail: null },
-    { pet:'Mochi', emoji:'🐱', owner:'Jose Reyes', phone:'0918-234-5678', service:'Vaccination', date:'2026-03-25', time:'10:00 AM', vet:'Dr. Santos', status:'Confirmed', notes:'', clientEmail: null },
+    { pet:'Buddy', emoji:'DG', owner:'Maria Santos', phone:'0917-123-4567', service:'General Checkup', date:'2026-03-25', time:'9:00 AM', vet:'Dr. Reyes', status:'Confirmed', notes:'', clientEmail: null },
+    { pet:'Mochi', emoji:'CT', owner:'Jose Reyes', phone:'0918-234-5678', service:'Vaccination', date:'2026-03-25', time:'10:00 AM', vet:'Dr. Santos', status:'Confirmed', notes:'', clientEmail: null },
   ];
   
   for (const appt of defaultAppointments) {
@@ -275,9 +263,7 @@ async function loadDefaultAppointments() {
   }
 }
 
-// ═══════════════════════════════════════════
 //  AUTO EXPIRY CHECK - REST API
-// ═══════════════════════════════════════════
 async function checkAccountExpiry() {
   try {
     const clients = await getAllClientsFromDB();
@@ -289,7 +275,7 @@ async function checkAccountExpiry() {
       }
     }
   } catch (error) {
-    console.warn('⚠️ Could not check account expiry:', error);
+    console.warn('Could not check account expiry:', error);
   }
 }
 
@@ -299,8 +285,8 @@ async function initializeApp() {
     await initAuthData();
     await initAppointmentsData();
     await checkAccountExpiry();
-    console.log('✅ ARF App initialized successfully');
+    console.log('ARF App initialized successfully');
   } catch (error) {
-    console.error('❌ Error initializing app:', error);
+    console.error('Error initializing app:', error);
   }
 }
