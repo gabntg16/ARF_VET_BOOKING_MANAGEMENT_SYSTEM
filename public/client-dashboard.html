@@ -113,6 +113,94 @@
       color: var(--text);
       margin-bottom: 1rem;
     }
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .section-header .section-title {
+      margin-bottom: 0;
+    }
+    .request-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .request-grid .full {
+      grid-column: 1 / -1;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border: 1px solid #dce6df;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.75rem 0.85rem;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.12);
+    }
+    .form-textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+    .primary-btn {
+      background: var(--green);
+      border: none;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .primary-btn:hover {
+      background: var(--primary-mid);
+      transform: translateY(-1px);
+    }
+    .primary-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .form-alert {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .form-alert.show {
+      display: block;
+    }
+    .form-alert.success {
+      background: #f0f9f4;
+      border: 1px solid #b7d9c8;
+      color: #2d6a4f;
+    }
+    .form-alert.error {
+      background: #fef2f0;
+      border: 1px solid #f5c6c6;
+      color: #c0392b;
+    }
     .empty-state {
       text-align: center;
       padding: 2rem;
@@ -199,6 +287,16 @@
       max-width: 900px;
       margin: 0 auto;
     }
+    @media (max-width: 720px) {
+      .request-grid,
+      .booking-details {
+        grid-template-columns: 1fr;
+      }
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
@@ -252,6 +350,59 @@
       <span class="status-label">Expiry Date</span>
       <span class="status-value" id="account-expiry">-</span>
     </div>
+  </div>
+
+  <!-- NEW APPOINTMENT REQUEST -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Request Another Appointment</div>
+        <div style="font-size:0.88rem;color:var(--muted)">Send a new visit request to the clinic using your client account.</div>
+      </div>
+    </div>
+    <div class="request-grid">
+      <div>
+        <label class="form-label" for="request-service">Service *</label>
+        <select class="form-select" id="request-service">
+          <option>General Checkup</option>
+          <option>Vaccination</option>
+          <option>Dental Cleaning</option>
+          <option>Grooming</option>
+          <option>Deworming</option>
+          <option>Surgery Consultation</option>
+          <option>Emergency</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label" for="request-date">Preferred Date *</label>
+        <input class="form-input" id="request-date" type="date"/>
+      </div>
+      <div>
+        <label class="form-label" for="request-time">Preferred Time *</label>
+        <select class="form-select" id="request-time">
+          <option>9:00 AM</option>
+          <option>9:30 AM</option>
+          <option>10:00 AM</option>
+          <option>10:30 AM</option>
+          <option>11:00 AM</option>
+          <option>2:00 PM</option>
+          <option>2:30 PM</option>
+          <option>3:00 PM</option>
+          <option>3:30 PM</option>
+          <option>4:00 PM</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label" for="request-vet">Preferred Vet</label>
+        <input class="form-input" id="request-vet" value="Any available veterinarian"/>
+      </div>
+      <div class="full">
+        <label class="form-label" for="request-notes">Notes or symptoms</label>
+        <textarea class="form-textarea" id="request-notes" placeholder="Tell the clinic what your pet needs help with."></textarea>
+      </div>
+    </div>
+    <button class="primary-btn" id="request-submit" style="margin-top:1rem" onclick="submitClientAppointment()">Send Appointment Request</button>
+    <div class="form-alert" id="request-alert"></div>
   </div>
 
   <!-- MY BOOKINGS -->
@@ -326,6 +477,58 @@ if (currentClient) {
   }
 
   // Load bookings
+  document.getElementById('request-date').min = new Date().toISOString().split('T')[0];
+  renderBookings(currentClient.email);
+}
+
+function showRequestAlert(message, type = 'error') {
+  const alert = document.getElementById('request-alert');
+  alert.textContent = message;
+  alert.className = `form-alert show ${type}`;
+}
+
+async function submitClientAppointment() {
+  const submitButton = document.getElementById('request-submit');
+  const service = document.getElementById('request-service').value;
+  const date = document.getElementById('request-date').value;
+  const time = document.getElementById('request-time').value;
+  const vet = document.getElementById('request-vet').value.trim() || 'Any available veterinarian';
+  const notes = document.getElementById('request-notes').value.trim();
+
+  if (!date || !time) {
+    showRequestAlert('Please choose your preferred date and time.');
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
+
+  const result = await createAppointmentInDB({
+    pet: currentClient.petName || 'Pet',
+    emoji: 'PT',
+    owner: currentClient.owner || 'Client',
+    phone: currentClient.phone || '',
+    service,
+    date,
+    time,
+    vet,
+    status: 'Pending',
+    notes,
+    clientEmail: currentClient.email
+  });
+
+  submitButton.disabled = false;
+  submitButton.textContent = 'Send Appointment Request';
+
+  if (!result.success) {
+    showRequestAlert(result.message || 'Could not send appointment request.');
+    return;
+  }
+
+  document.getElementById('request-date').value = '';
+  document.getElementById('request-notes').value = '';
+  document.getElementById('request-vet').value = 'Any available veterinarian';
+  showRequestAlert('Appointment request sent. Please wait for clinic confirmation.', 'success');
   renderBookings(currentClient.email);
 }
 
