@@ -502,12 +502,17 @@ function addPatient() {
 
 //  REPORTS
 function renderReports() {
+  document.getElementById('r-monthly').textContent = appointments.length;
+  document.getElementById('r-patients').textContent = patients.length;
+  document.getElementById('r-pending').textContent = appointments.filter(a => a.status === 'Pending').length;
+  document.getElementById('r-completed').textContent = appointments.filter(a => a.status === 'Completed').length;
+
   const services = {};
   appointments.forEach(a => { services[a.service] = (services[a.service]||0)+1; });
   const total = Object.values(services).reduce((s,v)=>s+v,0);
   const colors = ['var(--green)','var(--amber)','var(--blue)','var(--red)','#9b59b6','#1abc9c'];
   let i=0;
-  const chartHTML = Object.entries(services).sort((a,b)=>b[1]-a[1]).map(([s,c]) => {
+  const chartHTML = total === 0 ? '<div class="empty-state"><div class="emoji">--</div><p>No report data yet</p></div>' : Object.entries(services).sort((a,b)=>b[1]-a[1]).map(([s,c]) => {
     const pct = Math.round(c/total*100);
     return `<div style="margin-bottom:0.9rem">
       <div style="display:flex;justify-content:space-between;font-size:0.8rem;font-weight:700;margin-bottom:4px">
@@ -520,7 +525,7 @@ function renderReports() {
   }).join('');
   document.getElementById('services-chart').innerHTML = chartHTML;
 
-  const topHTML = patients.slice(0,5).map((p,idx) => `
+  const topHTML = patients.length === 0 ? '<div class="empty-state"><div class="emoji">--</div><p>No patient data yet</p></div>' : patients.slice(0,5).map((p,idx) => `
     <div style="display:flex;align-items:center;gap:0.8rem;padding:0.65rem 0;border-bottom:1px solid #f0ede8">
       <div style="font-size:1.1rem;font-weight:800;color:var(--muted);width:1.2rem">${idx+1}</div>
       <div class="pet-avatar">${patientMark(p)}</div>
@@ -529,6 +534,147 @@ function renderReports() {
     </div>
   `).join('');
   document.getElementById('top-patients').innerHTML = topHTML;
+}
+
+function csvCell(value) {
+  const text = String(value ?? '').replace(/\r?\n/g, ' ');
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function downloadTextFile(filename, content, mimeType = 'text/csv;charset=utf-8;') {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function htmlText(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function exportReportsCSV() {
+  const generatedAt = new Date().toLocaleString();
+  const statusCounts = appointments.reduce((acc, item) => {
+    const status = item.status || 'Unspecified';
+    acc[status] = (acc[status] || 0) + 1;
+    return acc;
+  }, {});
+  const serviceCounts = appointments.reduce((acc, item) => {
+    const service = item.service || 'Unspecified';
+    acc[service] = (acc[service] || 0) + 1;
+    return acc;
+  }, {});
+
+  const lines = [
+    ['ARF Portal Report'],
+    ['Generated At', generatedAt],
+    [],
+    ['Summary'],
+    ['Metric', 'Value'],
+    ['Total Appointments', appointments.length],
+    ['Total Patients', patients.length],
+    ['Total Staff', vets.length],
+    ['Pending Requests', statusCounts.Pending || 0],
+    ['Confirmed Appointments', statusCounts.Confirmed || 0],
+    ['Completed Visits', statusCounts.Completed || 0],
+    ['Cancelled Appointments', statusCounts.Cancelled || 0],
+    [],
+    ['Service Breakdown'],
+    ['Service', 'Appointments'],
+    ...Object.entries(serviceCounts).sort((a, b) => b[1] - a[1]),
+    [],
+    ['Appointment Details'],
+    ['ID', 'Pet', 'Owner', 'Phone', 'Service', 'Date', 'Time', 'Veterinarian', 'Status', 'Notes'],
+    ...appointments.map(a => [
+      a.id, a.pet, a.owner, a.phone, a.service, a.date, a.time, a.vet, a.status, a.notes || ''
+    ]),
+    [],
+    ['Patient Records'],
+    ['ID', 'Name', 'Species', 'Breed', 'Age', 'Owner', 'Phone', 'Last Visit'],
+    ...patients.map(p => [
+      p.id, p.name, p.species, p.breed, p.age, p.owner, p.phone, p.lastVisit
+    ]),
+  ];
+
+  const csv = lines.map(row => row.map(csvCell).join(',')).join('\r\n');
+  const stamp = new Date().toISOString().slice(0, 10);
+  downloadTextFile(`arf-report-${stamp}.csv`, csv);
+  showToast('Report CSV exported');
+}
+
+function printReports() {
+  const serviceRows = Object.entries(appointments.reduce((acc, item) => {
+    const service = item.service || 'Unspecified';
+    acc[service] = (acc[service] || 0) + 1;
+    return acc;
+  }, {})).sort((a, b) => b[1] - a[1]).map(([service, count]) =>
+    `<tr><td>${htmlText(service)}</td><td>${count}</td></tr>`
+  ).join('');
+
+  const appointmentRows = appointments.map(a => `
+    <tr>
+      <td>${htmlText(a.pet)}</td>
+      <td>${htmlText(a.owner)}</td>
+      <td>${htmlText(a.service)}</td>
+      <td>${htmlText(`${a.date || ''} ${a.time || ''}`.trim())}</td>
+      <td>${htmlText(a.vet)}</td>
+      <td>${htmlText(a.status)}</td>
+    </tr>
+  `).join('');
+
+  const reportWindow = window.open('', '_blank');
+  if (!reportWindow) {
+    showToast('Please allow pop-ups to print reports', 'amber');
+    return;
+  }
+  reportWindow.document.write(`
+    <!doctype html>
+    <html>
+    <head>
+      <title>ARF Portal Report</title>
+      <style>
+        body{font-family:Arial,sans-serif;color:#1e2a22;margin:32px}
+        h1{margin:0 0 4px;font-size:24px}
+        h2{margin-top:28px;font-size:16px;color:#3d6b4f}
+        p{color:#637569}
+        table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
+        th,td{border:1px solid #dde7e0;padding:8px;text-align:left}
+        th{background:#e8f2eb}
+        .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+        .card{border:1px solid #dde7e0;border-radius:8px;padding:12px}
+        .value{font-size:22px;font-weight:700;color:#3d6b4f}
+        @media print{button{display:none}}
+      </style>
+    </head>
+    <body>
+      <button onclick="window.print()">Print or Save as PDF</button>
+      <h1>ARF Portal Management Report</h1>
+      <p>Generated ${new Date().toLocaleString()}</p>
+      <div class="summary">
+        <div class="card"><div>Total Appointments</div><div class="value">${appointments.length}</div></div>
+        <div class="card"><div>Total Patients</div><div class="value">${patients.length}</div></div>
+        <div class="card"><div>Total Staff</div><div class="value">${vets.length}</div></div>
+        <div class="card"><div>Pending Requests</div><div class="value">${appointments.filter(a => a.status === 'Pending').length}</div></div>
+      </div>
+      <h2>Service Breakdown</h2>
+      <table><thead><tr><th>Service</th><th>Appointments</th></tr></thead><tbody>${serviceRows || '<tr><td colspan="2">No data yet</td></tr>'}</tbody></table>
+      <h2>Appointment Details</h2>
+      <table><thead><tr><th>Pet</th><th>Owner</th><th>Service</th><th>Schedule</th><th>Veterinarian</th><th>Status</th></tr></thead><tbody>${appointmentRows || '<tr><td colspan="6">No appointments yet</td></tr>'}</tbody></table>
+    </body>
+    </html>
+  `);
+  reportWindow.document.close();
+  reportWindow.focus();
 }
 
 //  UTILS

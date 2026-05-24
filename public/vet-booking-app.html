@@ -336,33 +336,45 @@
 
 
     <div class="page" id="page-reports">
+      <div class="card" style="margin-bottom:1.5rem">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Exportable Reports</div>
+            <div class="name-sub">Download clinic summaries for documentation and management review.</div>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-outline btn-sm" onclick="printReports()">Print Report</button>
+            <button class="btn btn-primary btn-sm" onclick="exportReportsCSV()">Export CSV</button>
+          </div>
+        </div>
+      </div>
       <div class="stats-grid" style="margin-bottom:1.5rem">
         <div class="stat-card">
           <div class="stat-icon" style="background:#e8f5ee">AP</div>
           <div>
-            <div class="stat-value" style="color:var(--green)" id="r-monthly">47</div>
-            <div class="stat-label">Appointments (March)</div>
+            <div class="stat-value" style="color:var(--green)" id="r-monthly">0</div>
+            <div class="stat-label">Total Appointments</div>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon" style="background:#fff4e0">PT</div>
           <div>
-            <div class="stat-value" style="color:var(--amber)">PHP 82k</div>
-            <div class="stat-label">Revenue (March)</div>
+            <div class="stat-value" style="color:var(--amber)" id="r-patients">0</div>
+            <div class="stat-label">Total Patients</div>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon" style="background:#fdf0ee">PN</div>
           <div>
-            <div class="stat-value" style="color:var(--red)">4</div>
-            <div class="stat-label">Cancellations</div>
+            <div class="stat-value" style="color:var(--red)" id="r-pending">0</div>
+            <div class="stat-label">Pending Requests</div>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon" style="background:#e8f0fa">DR</div>
           <div>
-            <div class="stat-value" style="color:var(--blue)">4.9</div>
-            <div class="stat-label">Avg. Rating</div>
+            <div class="stat-value" style="color:var(--blue)" id="r-completed">0</div>
+            <div class="stat-label">Completed Visits</div>
           </div>
         </div>
       </div>
