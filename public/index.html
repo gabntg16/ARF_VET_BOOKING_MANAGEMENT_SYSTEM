@@ -121,6 +121,11 @@
     .auth-feat-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px}
     .auth-feat-icon img{width:100%;height:100%;object-fit:contain}
     .login-card{background:var(--warm);border-radius:var(--rl);padding:2.5rem;box-shadow:var(--sh-lg)}
+    .portal-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;background:var(--cream);border:1px solid var(--border);border-radius:12px;padding:.35rem;margin-bottom:1.5rem}
+    .portal-tab{border:none;border-radius:9px;background:transparent;color:var(--mid);font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;padding:.72rem .85rem;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+    .portal-tab.active{background:#fff;color:var(--sage-d);box-shadow:var(--sh-sm)}
+    .portal-panel{display:none}
+    .portal-panel.active{display:block}
     .lc-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--ink);margin-bottom:.3rem}
     .lc-sub{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
     .booking-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 .85rem}
@@ -135,10 +140,12 @@
     .forgot a{font-size:.78rem;color:var(--sage);text-decoration:none;font-weight:600}
     .btn-login{width:100%;padding:.9rem;background:var(--sage);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,transform .15s}
     .btn-login:hover{background:var(--sage-d);transform:translateY(-1px)}
-    #alert{margin-top:1rem;padding:.75rem 1rem;border-radius:8px;font-size:.875rem;font-weight:500;display:none}
-    #alert.show{display:block}
-    #alert.alert-error{background:#fef2f0;color:#c0392b;border:1px solid #f5c6c6}
-    #alert.alert-success{background:#f0f9f4;color:#2d6a4f;border:1px solid #b7d9c8}
+    .client-login-panel{padding-top:.25rem}
+    .client-login-note{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:1rem;text-align:center}
+    .alert{margin-top:1rem;padding:.75rem 1rem;border-radius:8px;font-size:.875rem;font-weight:500;display:none}
+    .alert.show{display:block}
+    .alert.alert-error{background:#fef2f0;color:#c0392b;border:1px solid #f5c6c6}
+    .alert.alert-success{background:#f0f9f4;color:#2d6a4f;border:1px solid #b7d9c8}
 
     /* FOOTER */
     footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.5rem clamp(1.5rem,5vw,4rem)}
@@ -352,6 +359,11 @@
       </div>
       <div class="reveal" style="transition-delay:.1s">
         <div class="login-card">
+          <div class="portal-tabs" role="tablist" aria-label="Customer portal">
+            <button class="portal-tab active" id="booking-tab" type="button" role="tab" aria-selected="true" aria-controls="booking-panel" onclick="switchPortalMode('booking')">Book Appointment</button>
+            <button class="portal-tab" id="client-tab" type="button" role="tab" aria-selected="false" aria-controls="client-panel" onclick="switchPortalMode('client')">Client Login</button>
+          </div>
+          <div class="portal-panel active" id="booking-panel" role="tabpanel" aria-labelledby="booking-tab">
           <h3 class="lc-title">Request an appointment</h3>
           <p class="lc-sub">Fill in your pet and preferred schedule. No clinic visit is needed just to book.</p>
           <div class="booking-form-grid">
@@ -419,6 +431,18 @@
           </div>
           <button class="btn-login" onclick="submitPublicBooking()">Send Appointment Request →</button>
           <p id="booking-alert" class="alert"></p>
+          </div>
+          <div class="portal-panel client-login-panel" id="client-panel" role="tabpanel" aria-labelledby="client-tab">
+            <h3 class="lc-title">Client login</h3>
+            <p class="lc-sub">Sign in with the account created by clinic staff to view your pet profile and appointment status.</p>
+            <label class="fl" for="client-email">Email address</label>
+            <input id="client-email" class="fi" type="email" placeholder="client@email.com" autocomplete="email"/>
+            <label class="fl" for="client-password">Password</label>
+            <input id="client-password" class="fi" type="password" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key === 'Enter') clientLogin()"/>
+            <button class="btn-login" onclick="clientLogin()">Open Client Dashboard &rarr;</button>
+            <p id="alert" class="alert"></p>
+            <p class="client-login-note">Need an account? Please ask the clinic staff to create one from Client Accounts.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -449,6 +473,20 @@
     alert.textContent = message;
     alert.className = `alert show alert-${type}`;
     setTimeout(() => alert.classList.remove('show'), 5000);
+  }
+
+  function switchPortalMode(mode) {
+    const isClient = mode === 'client';
+    document.getElementById('booking-panel')?.classList.toggle('active', !isClient);
+    document.getElementById('client-panel')?.classList.toggle('active', isClient);
+    document.getElementById('booking-tab')?.classList.toggle('active', !isClient);
+    document.getElementById('client-tab')?.classList.toggle('active', isClient);
+    document.getElementById('booking-tab')?.setAttribute('aria-selected', String(!isClient));
+    document.getElementById('client-tab')?.setAttribute('aria-selected', String(isClient));
+
+    if (isClient) {
+      setTimeout(() => document.getElementById('client-email')?.focus(), 120);
+    }
   }
 
   async function submitPublicBooking() {
@@ -504,6 +542,8 @@
   function openBookingForService(service) {
     const serviceSelect = document.getElementById('booking-service');
     const bookingSection = document.getElementById('auth');
+
+    switchPortalMode('booking');
 
     if (serviceSelect && service) {
       serviceSelect.value = service;
