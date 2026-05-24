@@ -47,7 +47,7 @@
     .trust-i{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);font-weight:500}
     .hero-visual{position:relative;animation:fadeUp .7s .15s ease both}
     .hero-img-wrap{border-radius:var(--rl);overflow:hidden;aspect-ratio:4/5;box-shadow:var(--sh-lg)}
-    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;animation:slowZoom 12s ease-in-out infinite alternate}
+    .hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:54% 42%;display:block;animation:slowZoom 12s ease-in-out infinite alternate}
     @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.04)}}
     .badge{position:absolute;bottom:2rem;left:-1.5rem;background:var(--warm);border-radius:var(--r);padding:1rem 1.25rem;box-shadow:var(--sh-md);border:1px solid var(--border);display:flex;align-items:center;gap:.75rem;min-width:200px;animation:floatA 4s ease-in-out infinite}
     @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -85,7 +85,7 @@
     #about{background:var(--ink);color:#fff}
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
     .about-img-wrap{border-radius:var(--rl);overflow:hidden;aspect-ratio:5/6;box-shadow:var(--sh-lg);position:relative}
-    .about-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+    .about-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:52% 50%;display:block}
     .about-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,42,34,.6) 0%,transparent 50%)}
     .about-caption{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem}
     .about-caption p{font-size:.9rem;font-style:italic;color:rgba(255,255,255,.85);font-family:'DM Serif Display',serif}
@@ -206,7 +206,7 @@
     </div>
     <div class="hero-visual">
       <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=900&q=80" alt="Veterinarian with dog" loading="eager"/>
+        <img src="assets/images/kho-vet-hero.jpg" alt="KHO Veterinary Clinic staff holding a dog patient" loading="eager"/>
       </div>
       <div class="badge">
         <div class="badge-icon">🐶</div>
@@ -279,7 +279,7 @@
   <div class="si">
     <div class="about-grid">
       <div class="about-img-wrap reveal">
-        <img src="https://images.unsplash.com/photo-1559190394-df5a28aab5c5?auto=format&fit=crop&w=800&q=80" alt="ARF vet team" loading="lazy"/>
+        <img src="assets/images/kho-vet-cat-about.jpg" alt="Cat patient at KHO Veterinary Clinic" loading="lazy"/>
         <div class="about-overlay"></div>
         <div class="about-caption"><p>"We treat every patient as if they were our own."</p></div>
       </div>
