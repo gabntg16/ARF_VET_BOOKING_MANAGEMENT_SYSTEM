@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .system{fill:#3d6b4f;stroke:#254432;stroke-width:4;rx:28}.entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}
+      .store{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:18}.systemText{font:700 25px Arial,sans-serif;fill:#fff}
+      .text{font:700 20px Arial,sans-serif;fill:#1f2d24}.small{font:500 14px Arial,sans-serif;fill:#637569}
+      .arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.both{stroke:#2f4838;stroke-width:3;fill:none;marker-start:url(#arrowStart);marker-end:url(#arrow)}
+      .label{font:700 14px Arial,sans-serif;fill:#2f4838}.badge{fill:#e8f2eb;stroke:#3d6b4f;stroke-width:2}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/>
+    </marker>
+    <marker id="arrowStart" markerWidth="12" markerHeight="12" refX="2" refY="6" orient="auto">
+      <path d="M10,2 L2,6 L10,10 Z" fill="#2f4838"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">Context Diagram</text>
+  <text x="700" y="88" text-anchor="middle" class="sub">ARF Vet Booking Management System and its external entities</text>
+
+  <rect x="515" y="325" width="370" height="190" class="system"/>
+  <text x="700" y="396" text-anchor="middle" class="systemText">ARF Vet Booking</text>
+  <text x="700" y="430" text-anchor="middle" class="systemText">Management System</text>
+  <text x="700" y="466" text-anchor="middle" class="small" fill="#e8f2eb">Online booking, staff dashboard,</text>
+  <text x="700" y="489" text-anchor="middle" class="small" fill="#e8f2eb">client accounts, and clinic records</text>
+
+  <rect x="95" y="165" width="285" height="120" class="entity"/>
+  <circle cx="135" cy="225" r="22" class="badge"/>
+  <text x="135" y="232" text-anchor="middle" class="small">CU</text>
+  <text x="238" y="212" text-anchor="middle" class="text">Customer / Client</text>
+  <text x="238" y="240" text-anchor="middle" class="small">Books appointment and views status</text>
+
+  <rect x="95" y="615" width="285" height="120" class="entity"/>
+  <circle cx="135" cy="675" r="22" class="badge"/>
+  <text x="135" y="682" text-anchor="middle" class="small">AD</text>
+  <text x="238" y="662" text-anchor="middle" class="text">Admin / Staff</text>
+  <text x="238" y="690" text-anchor="middle" class="small">Manages bookings and records</text>
+
+  <rect x="1020" y="165" width="285" height="120" class="entity"/>
+  <circle cx="1060" cy="225" r="22" class="badge"/>
+  <text x="1060" y="232" text-anchor="middle" class="small">VT</text>
+  <text x="1163" y="212" text-anchor="middle" class="text">Veterinarian</text>
+  <text x="1163" y="240" text-anchor="middle" class="small">Receives assigned appointment details</text>
+
+  <rect x="1020" y="615" width="285" height="120" class="store"/>
+  <circle cx="1060" cy="675" r="22" class="badge"/>
+  <text x="1060" y="682" text-anchor="middle" class="small">DB</text>
+  <text x="1163" y="662" text-anchor="middle" class="text">Arf_db Database</text>
+  <text x="1163" y="690" text-anchor="middle" class="small">Stores appointments, users, patients</text>
+
+  <path d="M380 225 C455 240 500 295 545 340" class="both"/>
+  <text x="410" y="260" class="label">Appointment request</text>
+  <text x="410" y="282" class="label">Status update</text>
+
+  <path d="M380 675 C475 650 500 560 545 500" class="both"/>
+  <text x="405" y="610" class="label">Login, review, update</text>
+  <text x="405" y="632" class="label">Reports and records</text>
+
+  <path d="M885 340 C935 295 970 240 1020 225" class="both"/>
+  <text x="910" y="260" class="label">Assigned schedule</text>
+  <text x="910" y="282" class="label">Availability information</text>
+
+  <path d="M885 500 C935 560 970 650 1020 675" class="both"/>
+  <text x="910" y="610" class="label">Save and retrieve</text>
+  <text x="910" y="632" class="label">system records</text>
+</svg>
