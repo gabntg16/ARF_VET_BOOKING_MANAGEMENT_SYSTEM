@@ -71,17 +71,18 @@
     .svc-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;gap:2rem}
     .svc-desc{max-width:440px;color:var(--mid);line-height:1.7;font-size:1.05rem}
     .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-    .svc-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:2rem 1.75rem;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:default;position:relative;overflow:hidden}
+    .svc-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:2rem 1.75rem;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer;position:relative;overflow:hidden}
     .svc-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--sage);border-radius:0 2px 2px 0;transition:height .25s ease}
     .svc-card:hover{border-color:var(--sage-l);box-shadow:var(--sh-md);transform:translateY(-4px)}
+    .svc-card:focus-visible{outline:3px solid rgba(74,124,89,.25);outline-offset:3px;border-color:var(--sage)}
     .svc-card:hover::before{height:100%}
     .svc-icon{width:52px;height:52px;background:var(--amber-l);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;transition:transform .2s;padding:9px}
     .svc-icon img{width:100%;height:100%;object-fit:contain}
     .svc-card:hover .svc-icon{transform:scale(1.1)}
     .svc-name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);margin-bottom:.5rem}
     .svc-desc2{font-size:.875rem;color:var(--muted);line-height:1.65}
-    .svc-arrow{display:inline-flex;align-items:center;gap:.35rem;margin-top:1rem;font-size:.82rem;font-weight:600;color:var(--sage);opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s}
-    .svc-card:hover .svc-arrow{opacity:1;transform:translateX(0)}
+    .svc-arrow{display:inline-flex;align-items:center;gap:.35rem;margin-top:1rem;font-size:.82rem;font-weight:600;color:var(--sage);opacity:1;transform:translateX(0);transition:opacity .2s,transform .2s}
+    .svc-card:hover .svc-arrow,.svc-card:focus-visible .svc-arrow{opacity:1;transform:translateX(0)}
 
     /* ABOUT */
     #about{background:var(--ink);color:#fff}
@@ -237,37 +238,37 @@
       <p class="svc-desc">From routine checkups to complex surgeries, our board-certified veterinarians have the expertise your pet deserves.</p>
     </div>
     <div class="svc-grid">
-      <div class="svc-card reveal" style="transition-delay:.05s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="General Checkup" style="transition-delay:.05s">
         <div class="svc-icon"><img src="assets/icons/veterinarian.png" alt=""/></div>
         <div class="svc-name">Wellness Checkups</div>
         <p class="svc-desc2">Annual and bi-annual exams to keep your pet in peak health with full physical assessments.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
-      <div class="svc-card reveal" style="transition-delay:.1s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="Vaccination" style="transition-delay:.1s">
         <div class="svc-icon"><img src="assets/icons/appointment.png" alt=""/></div>
         <div class="svc-name">Vaccinations</div>
         <p class="svc-desc2">Core and non-core vaccines tailored to your pet's lifestyle, age, and risk factors.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
-      <div class="svc-card reveal" style="transition-delay:.15s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="Grooming" style="transition-delay:.15s">
         <div class="svc-icon"><img src="assets/icons/dog-service.png" alt=""/></div>
         <div class="svc-name">Grooming</div>
         <p class="svc-desc2">Full-service grooming including baths, trims, nail clipping, and ear cleaning.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
-      <div class="svc-card reveal" style="transition-delay:.2s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="Dental Cleaning" style="transition-delay:.2s">
         <div class="svc-icon"><img src="assets/icons/cat.png" alt=""/></div>
         <div class="svc-name">Dental Care</div>
         <p class="svc-desc2">Professional dental cleanings, extractions, and oral health assessments.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
-      <div class="svc-card reveal" style="transition-delay:.25s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="Surgery Consultation" style="transition-delay:.25s">
         <div class="svc-icon"><img src="assets/icons/report.png" alt=""/></div>
         <div class="svc-name">Surgery</div>
         <p class="svc-desc2">Soft-tissue surgeries including spay/neuter procedures with full anesthetic monitoring.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
-      <div class="svc-card reveal" style="transition-delay:.3s">
+      <div class="svc-card reveal" role="button" tabindex="0" data-service="Emergency" style="transition-delay:.3s">
         <div class="svc-icon"><img src="assets/icons/pending.png" alt=""/></div>
         <div class="svc-name">Emergency Care</div>
         <p class="svc-desc2">Urgent triage and stabilization during clinic hours for acute illness or trauma.</p>
@@ -499,6 +500,29 @@
     document.getElementById('booking-date').value = '';
     showBookingAlert('Appointment request sent. The clinic will confirm your schedule.', 'success');
   }
+
+  function openBookingForService(service) {
+    const serviceSelect = document.getElementById('booking-service');
+    const bookingSection = document.getElementById('auth');
+
+    if (serviceSelect && service) {
+      serviceSelect.value = service;
+    }
+
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  document.querySelectorAll('.svc-card[data-service]').forEach(card => {
+    card.addEventListener('click', () => openBookingForService(card.dataset.service));
+    card.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openBookingForService(card.dataset.service);
+      }
+    });
+  });
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
