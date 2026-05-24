@@ -8,18 +8,40 @@ const DB_USER = process.env.DB_USER || 'root';
 const DB_PASSWORD = process.env.DB_PASSWORD || '';
 const DB_NAME = process.env.DB_NAME || 'Arf_db';
 const DB_PORT = process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306;
+const DB_SKIP_CREATE = process.env.DB_SKIP_CREATE === 'true';
+const DB_SSL = process.env.DB_SSL === 'true';
+const DB_SSL_REJECT_UNAUTHORIZED = process.env.DB_SSL_REJECT_UNAUTHORIZED !== 'false';
+
+function getSslOptions() {
+  if (!DB_SSL) return undefined;
+  return {
+    rejectUnauthorized: DB_SSL_REJECT_UNAUTHORIZED
+  };
+}
 
 async function createDatabaseIfNeeded() {
-  const connection = await mysql.createConnection({
-    host: DB_HOST,
-    port: DB_PORT,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    multipleStatements: true
-  });
+  if (DB_SKIP_CREATE) return;
 
-  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
-  await connection.end();
+  let connection;
+
+  try {
+    connection = await mysql.createConnection({
+      host: DB_HOST,
+      port: DB_PORT,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      multipleStatements: true,
+      ssl: getSslOptions()
+    });
+
+    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;`);
+  } catch (error) {
+    console.warn(`Could not create database "${DB_NAME}". Continuing with the configured database.`, error.message);
+  } finally {
+    if (connection) {
+      await connection.end();
+    }
+  }
 }
 
 let pool;
@@ -36,7 +58,8 @@ async function getPool() {
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    dateStrings: true
+    dateStrings: true,
+    ssl: getSslOptions()
   });
   return pool;
 }

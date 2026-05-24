@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Deployable booking and clinic management app for ARF Veterinary Clinic",
   "main": "src/server.js",
+  "engines": {
+    "node": ">=18 <25"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",

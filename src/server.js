@@ -4,7 +4,7 @@ const path = require('path');
 const { getPool } = require('./config/db');
 const apiRoutes = require('./routes/api');
 
-const PORT = process.env.API_PORT || 3000;
+const PORT = process.env.PORT || process.env.API_PORT || 3000;
 
 async function createTables(pool) {
   const tableStatements = [
