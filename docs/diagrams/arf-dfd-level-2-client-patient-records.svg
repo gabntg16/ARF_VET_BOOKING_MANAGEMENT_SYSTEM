@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.bg{fill:#f6f3ee}.title{font:700 32px Arial,sans-serif;fill:#1f2d24}.sub{font:500 15px Arial,sans-serif;fill:#637569}.entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.proc{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}.store{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:12}.text{font:700 17px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}.num{font:800 17px Arial,sans-serif;fill:#3d6b4f}.arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.flow{font:700 13px Arial,sans-serif;fill:#2f4838}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/></marker></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">DFD Level 2 - Process 3.0: Client and Patient Records</text>
+  <text x="700" y="88" text-anchor="middle" class="sub">Client account creation, patient registration, and record retrieval</text>
+  <rect x="70" y="375" width="230" height="90" class="entity"/><text x="185" y="415" text-anchor="middle" class="text">Admin / Staff</text><text x="185" y="440" text-anchor="middle" class="small">Maintains records</text>
+  <rect x="405" y="160" width="260" height="90" class="proc"/><text x="430" y="192" class="num">3.1</text><text x="535" y="192" text-anchor="middle" class="text">Create Client Account</text><text x="535" y="220" text-anchor="middle" class="small">Email, password, expiry</text>
+  <rect x="405" y="360" width="260" height="90" class="proc"/><text x="430" y="392" class="num">3.2</text><text x="535" y="392" text-anchor="middle" class="text">Register Patient</text><text x="535" y="420" text-anchor="middle" class="small">Pet and owner details</text>
+  <rect x="405" y="560" width="260" height="90" class="proc"/><text x="430" y="592" class="num">3.3</text><text x="535" y="592" text-anchor="middle" class="text">Search / View Records</text><text x="535" y="620" text-anchor="middle" class="small">Patient and client list</text>
+  <rect x="790" y="260" width="260" height="90" class="proc"/><text x="815" y="292" class="num">3.4</text><text x="920" y="292" text-anchor="middle" class="text">Update Records</text><text x="920" y="320" text-anchor="middle" class="small">Edit expiry, details, status</text>
+  <rect x="1120" y="180" width="220" height="90" class="store"/><text x="1230" y="220" text-anchor="middle" class="text">D1 Clients</text><text x="1230" y="245" text-anchor="middle" class="small">Accounts</text>
+  <rect x="1120" y="460" width="220" height="90" class="store"/><text x="1230" y="500" text-anchor="middle" class="text">D2 Patients</text><text x="1230" y="525" text-anchor="middle" class="small">Pet records</text>
+  <path d="M300 420 H405" class="arrow"/><path d="M535 360 V250" class="arrow"/><path d="M665 205 H1120" class="arrow"/><path d="M665 405 H1120" class="arrow"/>
+  <path d="M665 605 H920 V350" class="arrow"/><path d="M1050 305 H1120" class="arrow"/><path d="M1050 320 C1100 350 1100 480 1120 505" class="arrow"/>
+  <path d="M405 605 H300" class="arrow"/><text x="318" y="585" class="flow">Record list</text>
+</svg>

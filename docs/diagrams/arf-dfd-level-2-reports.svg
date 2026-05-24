@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.bg{fill:#f6f3ee}.title{font:700 32px Arial,sans-serif;fill:#1f2d24}.sub{font:500 15px Arial,sans-serif;fill:#637569}.entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.proc{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}.store{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:12}.text{font:700 17px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}.num{font:800 17px Arial,sans-serif;fill:#3d6b4f}.arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.flow{font:700 13px Arial,sans-serif;fill:#2f4838}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/></marker></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">DFD Level 2 - Process 5.0: Reports and Analytics</text>
+  <text x="700" y="88" text-anchor="middle" class="sub">Dashboard totals, service breakdowns, and patient summaries</text>
+  <rect x="80" y="375" width="230" height="90" class="entity"/><text x="195" y="415" text-anchor="middle" class="text">Admin / Staff</text><text x="195" y="440" text-anchor="middle" class="small">Requests reports</text>
+  <rect x="420" y="160" width="260" height="90" class="proc"/><text x="445" y="192" class="num">5.1</text><text x="550" y="192" text-anchor="middle" class="text">Collect Records</text><text x="550" y="220" text-anchor="middle" class="small">Appointments, patients, vets</text>
+  <rect x="420" y="350" width="260" height="90" class="proc"/><text x="445" y="382" class="num">5.2</text><text x="550" y="382" text-anchor="middle" class="text">Compute Summaries</text><text x="550" y="410" text-anchor="middle" class="small">Counts and status totals</text>
+  <rect x="420" y="540" width="260" height="90" class="proc"/><text x="445" y="572" class="num">5.3</text><text x="550" y="572" text-anchor="middle" class="text">Generate Dashboard</text><text x="550" y="600" text-anchor="middle" class="small">Cards and lists</text>
+  <rect x="805" y="350" width="260" height="90" class="proc"/><text x="830" y="382" class="num">5.4</text><text x="935" y="382" text-anchor="middle" class="text">Display Insights</text><text x="935" y="410" text-anchor="middle" class="small">Top patients and services</text>
+  <rect x="1120" y="160" width="220" height="80" class="store"/><text x="1230" y="193" text-anchor="middle" class="text">D1 Appointments</text>
+  <rect x="1120" y="330" width="220" height="80" class="store"/><text x="1230" y="363" text-anchor="middle" class="text">D2 Patients</text>
+  <rect x="1120" y="500" width="220" height="80" class="store"/><text x="1230" y="533" text-anchor="middle" class="text">D3 Vets</text>
+  <path d="M310 420 H420" class="arrow"/><path d="M680 205 H1120" class="arrow"/><path d="M1120 200 H680" class="arrow"/>
+  <path d="M680 395 H1120" class="arrow"/><path d="M1120 370 H680" class="arrow"/><path d="M680 585 C800 585 860 500 935 440" class="arrow"/>
+  <path d="M935 350 C1010 300 1060 540 1120 540" class="arrow"/><path d="M805 395 H680" class="arrow"/><path d="M420 585 H310" class="arrow"/><text x="320" y="565" class="flow">Dashboard output</text>
+</svg>

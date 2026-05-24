@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1000" viewBox="0 0 1500 1000">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .boundary{fill:#fff;stroke:#d8e4dc;stroke-width:3;rx:28}.actor{stroke:#2f4838;stroke-width:4;fill:none}.case{fill:#eef6f0;stroke:#3d6b4f;stroke-width:3}
+      .text{font:700 17px Arial,sans-serif;fill:#1f2d24}.small{font:500 14px Arial,sans-serif;fill:#637569}.line{stroke:#2f4838;stroke-width:3}
+    </style>
+  </defs>
+  <rect class="bg" width="1500" height="1000"/>
+  <text x="750" y="58" text-anchor="middle" class="title">Use Case Diagram</text>
+  <text x="750" y="88" text-anchor="middle" class="sub">ARF Vet Booking Management System</text>
+
+  <rect x="330" y="135" width="830" height="760" class="boundary"/>
+  <text x="745" y="175" text-anchor="middle" class="text">System Boundary: ARF Vet Booking Management System</text>
+
+  <g transform="translate(110 230)">
+    <circle cx="55" cy="35" r="30" class="actor"/><path d="M55 65 V145 M10 95 H100 M55 145 L20 205 M55 145 L90 205" class="actor"/>
+    <text x="55" y="245" text-anchor="middle" class="text">Customer</text>
+  </g>
+  <g transform="translate(110 620)">
+    <circle cx="55" cy="35" r="30" class="actor"/><path d="M55 65 V145 M10 95 H100 M55 145 L20 205 M55 145 L90 205" class="actor"/>
+    <text x="55" y="245" text-anchor="middle" class="text">Admin / Staff</text>
+  </g>
+  <g transform="translate(1260 430)">
+    <circle cx="55" cy="35" r="30" class="actor"/><path d="M55 65 V145 M10 95 H100 M55 145 L20 205 M55 145 L90 205" class="actor"/>
+    <text x="55" y="245" text-anchor="middle" class="text">Veterinarian</text>
+  </g>
+
+  <ellipse cx="535" cy="260" rx="145" ry="42" class="case"/><text x="535" y="266" text-anchor="middle" class="text">Book Appointment</text>
+  <ellipse cx="535" cy="375" rx="145" ry="42" class="case"/><text x="535" y="381" text-anchor="middle" class="text">View Booking Status</text>
+  <ellipse cx="535" cy="490" rx="145" ry="42" class="case"/><text x="535" y="496" text-anchor="middle" class="text">Client Login</text>
+  <ellipse cx="820" cy="260" rx="145" ry="42" class="case"/><text x="820" y="266" text-anchor="middle" class="text">Staff Login</text>
+  <ellipse cx="820" cy="375" rx="145" ry="42" class="case"/><text x="820" y="381" text-anchor="middle" class="text">Manage Appointments</text>
+  <ellipse cx="820" cy="490" rx="145" ry="42" class="case"/><text x="820" y="496" text-anchor="middle" class="text">Manage Patients</text>
+  <ellipse cx="820" cy="605" rx="145" ry="42" class="case"/><text x="820" y="611" text-anchor="middle" class="text">Manage Staff</text>
+  <ellipse cx="820" cy="720" rx="145" ry="42" class="case"/><text x="820" y="726" text-anchor="middle" class="text">Generate Reports</text>
+  <ellipse cx="535" cy="720" rx="145" ry="42" class="case"/><text x="535" y="726" text-anchor="middle" class="text">Manage Client Accounts</text>
+
+  <path d="M210 315 L390 260" class="line"/><path d="M210 330 L390 375" class="line"/><path d="M210 345 L390 490" class="line"/>
+  <path d="M210 705 L675 260" class="line"/><path d="M210 720 L675 375" class="line"/><path d="M210 735 L675 490" class="line"/>
+  <path d="M210 750 L675 605" class="line"/><path d="M210 765 L675 720" class="line"/><path d="M210 780 L390 720" class="line"/>
+  <path d="M1260 520 L965 375" class="line"/><path d="M1260 535 L965 605" class="line"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.bg{fill:#f6f3ee}.title{font:700 32px Arial,sans-serif;fill:#1f2d24}.sub{font:500 15px Arial,sans-serif;fill:#637569}.entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.proc{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}.store{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:12}.text{font:700 17px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}.num{font:800 17px Arial,sans-serif;fill:#3d6b4f}.arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.flow{font:700 13px Arial,sans-serif;fill:#2f4838}</style><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/></marker></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">DFD Level 2 - Process 2.0: Appointment Management</text>
+  <text x="700" y="88" text-anchor="middle" class="sub">Booking request, review, confirmation, and status update</text>
+  <rect x="70" y="190" width="230" height="90" class="entity"/><text x="185" y="230" text-anchor="middle" class="text">Customer</text><text x="185" y="255" text-anchor="middle" class="small">Submits request</text>
+  <rect x="70" y="610" width="230" height="90" class="entity"/><text x="185" y="650" text-anchor="middle" class="text">Admin / Staff</text><text x="185" y="675" text-anchor="middle" class="small">Reviews schedule</text>
+  <rect x="410" y="170" width="250" height="90" class="proc"/><text x="435" y="202" class="num">2.1</text><text x="535" y="202" text-anchor="middle" class="text">Receive Request</text><text x="535" y="230" text-anchor="middle" class="small">Collect booking form</text>
+  <rect x="410" y="350" width="250" height="90" class="proc"/><text x="435" y="382" class="num">2.2</text><text x="535" y="382" text-anchor="middle" class="text">Validate Schedule</text><text x="535" y="410" text-anchor="middle" class="small">Check date, time, vet</text>
+  <rect x="770" y="350" width="250" height="90" class="proc"/><text x="795" y="382" class="num">2.3</text><text x="895" y="382" text-anchor="middle" class="text">Save Pending</text><text x="895" y="410" text-anchor="middle" class="small">Create appointment record</text>
+  <rect x="770" y="560" width="250" height="90" class="proc"/><text x="795" y="592" class="num">2.4</text><text x="895" y="592" text-anchor="middle" class="text">Update Status</text><text x="895" y="620" text-anchor="middle" class="small">Confirmed, completed, cancelled</text>
+  <rect x="1110" y="350" width="230" height="90" class="store"/><text x="1225" y="390" text-anchor="middle" class="text">D1 Appointments</text><text x="1225" y="415" text-anchor="middle" class="small">Booking records</text>
+  <rect x="1110" y="560" width="230" height="90" class="store"/><text x="1225" y="600" text-anchor="middle" class="text">D2 Patients</text><text x="1225" y="625" text-anchor="middle" class="small">Pet owner records</text>
+  <path d="M300 235 H410" class="arrow"/><path d="M535 260 V350" class="arrow"/><path d="M660 395 H770" class="arrow"/><path d="M1020 395 H1110" class="arrow"/>
+  <path d="M300 655 H770" class="arrow"/><text x="445" y="635" class="flow">Review action</text>
+  <path d="M1020 605 H1110" class="arrow"/><path d="M895 560 V440" class="arrow"/><path d="M770 605 H300" class="arrow"/><text x="410" y="585" class="flow">Status result</text>
+</svg>

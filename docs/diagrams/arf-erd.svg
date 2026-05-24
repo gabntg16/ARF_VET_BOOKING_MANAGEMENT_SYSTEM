@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:16}.head{fill:#3d6b4f}.headText{font:700 19px Arial,sans-serif;fill:#fff}
+      .field{font:500 15px Arial,sans-serif;fill:#1f2d24}.pk{font:700 15px Arial,sans-serif;fill:#c8763a}.rel{stroke:#2f4838;stroke-width:3;fill:none}
+      .label{font:700 14px Arial,sans-serif;fill:#2f4838}.note{font:500 13px Arial,sans-serif;fill:#637569}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="1100"/>
+  <text x="800" y="58" text-anchor="middle" class="title">Entity Relationship Diagram</text>
+  <text x="800" y="88" text-anchor="middle" class="sub">ARF Vet Booking Management System Database Structure</text>
+
+  <g transform="translate(80 150)">
+    <rect width="330" height="300" class="entity"/><rect width="330" height="48" class="head" rx="16"/>
+    <text x="165" y="31" text-anchor="middle" class="headText">clients</text>
+    <text x="24" y="82" class="pk">PK email</text>
+    <text x="24" y="112" class="field">password</text><text x="24" y="142" class="field">petName</text>
+    <text x="24" y="172" class="field">owner</text><text x="24" y="202" class="field">phone</text>
+    <text x="24" y="232" class="field">createdDate</text><text x="24" y="262" class="field">expiryDate, status, createdAt</text>
+  </g>
+
+  <g transform="translate(635 120)">
+    <rect width="330" height="360" class="entity"/><rect width="330" height="48" class="head" rx="16"/>
+    <text x="165" y="31" text-anchor="middle" class="headText">appointments</text>
+    <text x="24" y="82" class="pk">PK id</text><text x="24" y="112" class="field">pet, owner, phone</text>
+    <text x="24" y="142" class="field">service</text><text x="24" y="172" class="field">date, time</text>
+    <text x="24" y="202" class="field">vet</text><text x="24" y="232" class="field">status</text>
+    <text x="24" y="262" class="field">notes</text><text x="24" y="292" class="field">FK clientEmail</text>
+    <text x="24" y="322" class="field">createdAt, updatedAt</text>
+  </g>
+
+  <g transform="translate(1190 150)">
+    <rect width="330" height="270" class="entity"/><rect width="330" height="48" class="head" rx="16"/>
+    <text x="165" y="31" text-anchor="middle" class="headText">vets</text>
+    <text x="24" y="82" class="pk">PK id</text><text x="24" y="112" class="field">name</text>
+    <text x="24" y="142" class="field">spec</text><text x="24" y="172" class="field">status</text>
+    <text x="24" y="202" class="field">appts</text><text x="24" y="232" class="field">emoji / display mark</text>
+  </g>
+
+  <g transform="translate(360 650)">
+    <rect width="330" height="300" class="entity"/><rect width="330" height="48" class="head" rx="16"/>
+    <text x="165" y="31" text-anchor="middle" class="headText">patients</text>
+    <text x="24" y="82" class="pk">PK id</text><text x="24" y="112" class="field">name</text>
+    <text x="24" y="142" class="field">species, breed</text><text x="24" y="172" class="field">age</text>
+    <text x="24" y="202" class="field">owner</text><text x="24" y="232" class="field">phone</text>
+    <text x="24" y="262" class="field">lastVisit, createdAt</text>
+  </g>
+
+  <g transform="translate(910 660)">
+    <rect width="330" height="240" class="entity"/><rect width="330" height="48" class="head" rx="16"/>
+    <text x="165" y="31" text-anchor="middle" class="headText">settings</text>
+    <text x="24" y="82" class="pk">PK id</text><text x="24" y="112" class="field">adminPassword</text>
+    <text x="24" y="142" class="field">clinicName</text><text x="24" y="172" class="field">clinicPhone</text>
+  </g>
+
+  <path d="M410 300 H635" class="rel"/><text x="500" y="280" class="label">1 client</text><text x="548" y="330" class="label">many appointments</text>
+  <path d="M965 300 H1190" class="rel"/><text x="1015" y="280" class="label">assigned vet</text><text x="1120" y="330" class="label">many bookings</text>
+  <path d="M690 700 C760 620 800 545 800 480" class="rel"/><text x="715" y="630" class="label">pet/owner record supports bookings</text>
+  <path d="M1075 660 C1030 570 980 525 900 480" class="rel"/><text x="1000" y="610" class="label">system configuration</text>
+  <text x="800" y="1010" text-anchor="middle" class="note">Note: current implementation stores related names/emails directly; relationships show the logical design used by the system.</text>
+</svg>

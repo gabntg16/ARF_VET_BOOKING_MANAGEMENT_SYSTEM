@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1100" viewBox="0 0 1500 1100">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .lane{fill:#fff;stroke:#d8e4dc;stroke-width:2}.laneTitle{font:700 18px Arial,sans-serif;fill:#3d6b4f}
+      .step{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.db{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:14}
+      .text{font:700 16px Arial,sans-serif;fill:#1f2d24}.small{font:500 12px Arial,sans-serif;fill:#637569}
+      .arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/></marker>
+  </defs>
+  <rect class="bg" width="1500" height="1100"/>
+  <text x="750" y="58" text-anchor="middle" class="title">Process Flowchart</text>
+  <text x="750" y="88" text-anchor="middle" class="sub">Swimlane workflow for ARF Vet Booking Management System</text>
+  <rect x="70" y="130" width="420" height="890" class="lane"/><text x="95" y="165" class="laneTitle">Customer / Client</text>
+  <rect x="490" y="130" width="420" height="890" class="lane"/><text x="515" y="165" class="laneTitle">System</text>
+  <rect x="910" y="130" width="270" height="890" class="lane"/><text x="935" y="165" class="laneTitle">Arf_db</text>
+  <rect x="1180" y="130" width="250" height="890" class="lane"/><text x="1205" y="165" class="laneTitle">Admin / Staff</text>
+
+  <rect x="150" y="220" width="250" height="70" class="step"/><text x="275" y="250" text-anchor="middle" class="text">Open Website</text><text x="275" y="273" text-anchor="middle" class="small">Access booking page</text>
+  <rect x="150" y="360" width="250" height="70" class="step"/><text x="275" y="390" text-anchor="middle" class="text">Submit Booking Form</text><text x="275" y="413" text-anchor="middle" class="small">Pet, owner, service, schedule</text>
+  <rect x="575" y="360" width="250" height="70" class="step"/><text x="700" y="390" text-anchor="middle" class="text">Validate Request</text><text x="700" y="413" text-anchor="middle" class="small">Required fields checked</text>
+  <rect x="940" y="360" width="210" height="70" class="db"/><text x="1045" y="390" text-anchor="middle" class="text">Save Pending</text><text x="1045" y="413" text-anchor="middle" class="small">appointments table</text>
+  <rect x="1210" y="500" width="190" height="70" class="step"/><text x="1305" y="530" text-anchor="middle" class="text">Login</text><text x="1305" y="553" text-anchor="middle" class="small">Staff dashboard</text>
+  <rect x="1210" y="640" width="190" height="70" class="step"/><text x="1305" y="670" text-anchor="middle" class="text">Review Booking</text><text x="1305" y="693" text-anchor="middle" class="small">Check schedule</text>
+  <rect x="575" y="640" width="250" height="70" class="step"/><text x="700" y="670" text-anchor="middle" class="text">Update Status</text><text x="700" y="693" text-anchor="middle" class="small">Confirm, complete, cancel</text>
+  <rect x="940" y="780" width="210" height="70" class="db"/><text x="1045" y="810" text-anchor="middle" class="text">Store Updates</text><text x="1045" y="833" text-anchor="middle" class="small">records refreshed</text>
+  <rect x="150" y="910" width="250" height="70" class="step"/><text x="275" y="940" text-anchor="middle" class="text">View Status</text><text x="275" y="963" text-anchor="middle" class="small">Client dashboard</text>
+
+  <path d="M275 290 V360" class="arrow"/><path d="M400 395 H575" class="arrow"/><path d="M825 395 H940" class="arrow"/>
+  <path d="M1045 430 V535 H1210" class="arrow"/><path d="M1305 570 V640" class="arrow"/><path d="M1210 675 H825" class="arrow"/>
+  <path d="M700 710 V815 H940" class="arrow"/><path d="M940 815 H700 V945 H400" class="arrow"/>
+</svg>
