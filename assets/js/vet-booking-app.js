@@ -59,6 +59,33 @@ function staffIcon() {
   return iconImg('assets/icons/veterinarian.png', 'Veterinarian');
 }
 
+function getVetOptions(selectedVet = '') {
+  const names = vets.map(v => v.name).filter(Boolean);
+
+  if (selectedVet && !names.includes(selectedVet)) {
+    names.push(selectedVet);
+  }
+
+  return (names.length ? names : ['Any available veterinarian'])
+    .map(name => `<option value="${htmlText(name)}"${name === selectedVet ? ' selected' : ''}>${htmlText(name)}</option>`)
+    .join('');
+}
+
+function refreshVetSelects(selectedVet = '') {
+  const newBookingVet = document.getElementById('f-vet');
+  const editVet = document.getElementById('edit-vet');
+
+  if (newBookingVet) {
+    const currentValue = selectedVet || newBookingVet.value;
+    newBookingVet.innerHTML = getVetOptions(currentValue);
+  }
+
+  if (editVet) {
+    const currentValue = selectedVet || editVet.value;
+    editVet.innerHTML = getVetOptions(currentValue);
+  }
+}
+
 // Load all data from the backend
 async function loadDataFromBackend() {
   try {
@@ -66,6 +93,7 @@ async function loadDataFromBackend() {
     patients = await getPatientsFromDB();
     vets = await getVetsFromDB();
     adminSettings = await getAdminSettingsFromDB() || adminSettings;
+    refreshVetSelects();
 
     // If no data exists, load defaults
     if (appointments.length === 0) {
@@ -74,6 +102,7 @@ async function loadDataFromBackend() {
       appointments = await getAppointmentsFromDB();
       patients = await getPatientsFromDB();
       vets = await getVetsFromDB();
+      refreshVetSelects();
     }
   } catch (error) {
     console.error('Error loading data from backend:', error);
@@ -154,6 +183,7 @@ function navigate(page, btn) {
   if (page === 'clients') renderClientsPage();
   if (page === 'settings') renderSettings();
   if (page === 'book') {
+    refreshVetSelects();
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('f-date').value = today;
   }
@@ -411,7 +441,7 @@ function openEditModal(id) {
   if (!a) return;
   document.getElementById('edit-id').value = id;
   document.getElementById('edit-status').value = a.status;
-  document.getElementById('edit-vet').value = a.vet;
+  refreshVetSelects(a.vet);
   document.getElementById('edit-date').value = a.date;
   document.getElementById('edit-time').value = a.time;
   document.getElementById('edit-notes').value = a.notes || '';
@@ -532,6 +562,7 @@ function addVet() {
     closeModal('modal-vet');
     loadDataFromBackend().then(() => {
       renderVets();
+      refreshVetSelects(name);
       showToast(`${name} added to staff!`);
     });
     ['mv-name','mv-spec','mv-phone'].forEach(id => document.getElementById(id).value='');
