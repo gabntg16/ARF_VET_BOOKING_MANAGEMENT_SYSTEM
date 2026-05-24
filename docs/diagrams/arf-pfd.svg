@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .lane{fill:#fff;stroke:#d8e4dc;stroke-width:2;rx:18}.laneTitle{font:700 18px Arial,sans-serif;fill:#3d6b4f}
+      .step{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.data{fill:#eef6f0;stroke:#3d6b4f;stroke-width:3;rx:14}
+      .text{font:700 17px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}
+      .arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.num{fill:#c8763a;font:800 18px Arial,sans-serif}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="900"/>
+  <text x="700" y="58" text-anchor="middle" class="title">Process Flow Diagram (PFD)</text>
+  <text x="700" y="88" text-anchor="middle" class="sub">ARF Vet Booking Management System</text>
+
+  <rect x="55" y="130" width="1290" height="170" class="lane"/>
+  <text x="80" y="162" class="laneTitle">Customer</text>
+  <rect x="120" y="190" width="220" height="72" class="step"/>
+  <text x="145" y="218" class="num">1</text><text x="230" y="218" text-anchor="middle" class="text">Open Website</text>
+  <text x="230" y="242" text-anchor="middle" class="small">Access public booking page</text>
+  <rect x="410" y="190" width="250" height="72" class="step"/>
+  <text x="435" y="218" class="num">2</text><text x="535" y="218" text-anchor="middle" class="text">Submit Appointment</text>
+  <text x="535" y="242" text-anchor="middle" class="small">Enter pet and owner details</text>
+
+  <rect x="55" y="350" width="1290" height="170" class="lane"/>
+  <text x="80" y="382" class="laneTitle">System</text>
+  <rect x="410" y="410" width="250" height="72" class="step"/>
+  <text x="435" y="438" class="num">3</text><text x="535" y="438" text-anchor="middle" class="text">Validate Data</text>
+  <text x="535" y="462" text-anchor="middle" class="small">Check required fields</text>
+  <rect x="740" y="410" width="250" height="72" class="data"/>
+  <text x="765" y="438" class="num">4</text><text x="865" y="438" text-anchor="middle" class="text">Save to Arf_db</text>
+  <text x="865" y="462" text-anchor="middle" class="small">Status: Pending</text>
+  <rect x="1060" y="410" width="220" height="72" class="step"/>
+  <text x="1085" y="438" class="num">5</text><text x="1170" y="438" text-anchor="middle" class="text">Show in Dashboard</text>
+  <text x="1170" y="462" text-anchor="middle" class="small">Admin appointment list</text>
+
+  <rect x="55" y="570" width="1290" height="170" class="lane"/>
+  <text x="80" y="602" class="laneTitle">Admin / Staff</text>
+  <rect x="310" y="630" width="230" height="72" class="step"/>
+  <text x="335" y="658" class="num">6</text><text x="425" y="658" text-anchor="middle" class="text">Login</text>
+  <text x="425" y="682" text-anchor="middle" class="small">Authorized access</text>
+  <rect x="610" y="630" width="250" height="72" class="step"/>
+  <text x="635" y="658" class="num">7</text><text x="735" y="658" text-anchor="middle" class="text">Review Request</text>
+  <text x="735" y="682" text-anchor="middle" class="small">Check schedule and details</text>
+  <rect x="930" y="630" width="250" height="72" class="step"/>
+  <text x="955" y="658" class="num">8</text><text x="1055" y="658" text-anchor="middle" class="text">Update Status</text>
+  <text x="1055" y="682" text-anchor="middle" class="small">Confirm, complete, cancel</text>
+
+  <path d="M340 226 H410" class="arrow"/>
+  <path d="M535 262 V410" class="arrow"/>
+  <path d="M660 446 H740" class="arrow"/>
+  <path d="M990 446 H1060" class="arrow"/>
+  <path d="M1170 482 V545 H425 V630" class="arrow"/>
+  <path d="M540 666 H610" class="arrow"/>
+  <path d="M860 666 H930" class="arrow"/>
+  <path d="M1055 630 V545 H865 V482" class="arrow"/>
+</svg>

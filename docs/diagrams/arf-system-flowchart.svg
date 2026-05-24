@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .box{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}.decision{fill:#fffaf1;stroke:#c8763a;stroke-width:3}
+      .term{fill:#3d6b4f;stroke:#2b4d38;stroke-width:3;rx:28}.termText{font:700 20px Arial,sans-serif;fill:#fff}
+      .text{font:700 19px Arial,sans-serif;fill:#1f2d24}.small{font:500 14px Arial,sans-serif;fill:#637569}
+      .arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.label{font:700 14px Arial,sans-serif;fill:#3d6b4f}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1400" height="1000"/>
+  <text x="700" y="62" text-anchor="middle" class="title">ARF Vet Booking Management System Flowchart</text>
+  <text x="700" y="92" text-anchor="middle" class="sub">Customer appointment request, admin review, and booking status update</text>
+
+  <rect x="570" y="130" width="260" height="58" class="term"/>
+  <text x="700" y="166" text-anchor="middle" class="termText">Start</text>
+
+  <rect x="520" y="230" width="360" height="82" class="box"/>
+  <text x="700" y="262" text-anchor="middle" class="text">Customer Opens ARF Website</text>
+  <text x="700" y="286" text-anchor="middle" class="small">Landing page and booking form</text>
+
+  <rect x="520" y="350" width="360" height="82" class="box"/>
+  <text x="700" y="382" text-anchor="middle" class="text">Customer Fills Appointment Form</text>
+  <text x="700" y="406" text-anchor="middle" class="small">Pet, owner, service, date, time</text>
+
+  <path d="M700 470 L880 540 L700 610 L520 540 Z" class="decision"/>
+  <text x="700" y="532" text-anchor="middle" class="text">Form Complete?</text>
+  <text x="700" y="557" text-anchor="middle" class="small">Validate required fields</text>
+
+  <rect x="120" y="499" width="300" height="82" class="box"/>
+  <text x="270" y="532" text-anchor="middle" class="text">Show Validation Message</text>
+  <text x="270" y="556" text-anchor="middle" class="small">Customer corrects missing data</text>
+
+  <rect x="520" y="660" width="360" height="82" class="box"/>
+  <text x="700" y="692" text-anchor="middle" class="text">Save Request as Pending</text>
+  <text x="700" y="716" text-anchor="middle" class="small">Appointment is stored in Arf_db</text>
+
+  <rect x="960" y="660" width="320" height="82" class="box"/>
+  <text x="1120" y="692" text-anchor="middle" class="text">Admin/Staff Logs In</text>
+  <text x="1120" y="716" text-anchor="middle" class="small">Staff dashboard access</text>
+
+  <rect x="960" y="790" width="320" height="82" class="box"/>
+  <text x="1120" y="822" text-anchor="middle" class="text">Review Pending Request</text>
+  <text x="1120" y="846" text-anchor="middle" class="small">Confirm, edit, or cancel booking</text>
+
+  <rect x="520" y="790" width="360" height="82" class="box"/>
+  <text x="700" y="822" text-anchor="middle" class="text">Update Appointment Status</text>
+  <text x="700" y="846" text-anchor="middle" class="small">Confirmed, completed, or cancelled</text>
+
+  <rect x="570" y="915" width="260" height="58" class="term"/>
+  <text x="700" y="951" text-anchor="middle" class="termText">End</text>
+
+  <path d="M700 188 V230" class="arrow"/>
+  <path d="M700 312 V350" class="arrow"/>
+  <path d="M700 432 V470" class="arrow"/>
+  <path d="M520 540 H420" class="arrow"/>
+  <text x="468" y="524" class="label">No</text>
+  <path d="M270 499 V390 H520" class="arrow"/>
+  <path d="M700 610 V660" class="arrow"/>
+  <text x="718" y="635" class="label">Yes</text>
+  <path d="M880 701 H960" class="arrow"/>
+  <path d="M1120 742 V790" class="arrow"/>
+  <path d="M960 831 H880" class="arrow"/>
+  <path d="M700 872 V915" class="arrow"/>
+</svg>

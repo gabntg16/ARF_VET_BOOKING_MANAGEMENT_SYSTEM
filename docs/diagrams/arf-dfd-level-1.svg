@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1050" viewBox="0 0 1500 1050">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 34px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .entity{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:14}.process{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:20}
+      .store{fill:#eef6f0;stroke:#c8763a;stroke-width:3;rx:10}.num{fill:#3d6b4f;font:800 18px Arial,sans-serif}
+      .text{font:700 18px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}
+      .arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}.flow{font:700 13px Arial,sans-serif;fill:#2f4838}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1500" height="1050"/>
+  <text x="750" y="58" text-anchor="middle" class="title">Data Flow Diagram - Level 1</text>
+  <text x="750" y="88" text-anchor="middle" class="sub">Major processes and data stores of the ARF Vet Booking Management System</text>
+
+  <rect x="70" y="170" width="230" height="90" class="entity"/>
+  <text x="185" y="210" text-anchor="middle" class="text">Customer</text>
+  <text x="185" y="236" text-anchor="middle" class="small">Pet owner</text>
+
+  <rect x="70" y="735" width="230" height="90" class="entity"/>
+  <text x="185" y="775" text-anchor="middle" class="text">Admin / Staff</text>
+  <text x="185" y="801" text-anchor="middle" class="small">Clinic user</text>
+
+  <rect x="420" y="145" width="280" height="105" class="process"/>
+  <text x="445" y="178" class="num">1.0</text>
+  <text x="560" y="178" text-anchor="middle" class="text">Submit Appointment</text>
+  <text x="560" y="206" text-anchor="middle" class="small">Customer booking details</text>
+  <text x="560" y="228" text-anchor="middle" class="small">are validated and prepared</text>
+
+  <rect x="420" y="360" width="280" height="105" class="process"/>
+  <text x="445" y="393" class="num">2.0</text>
+  <text x="560" y="393" text-anchor="middle" class="text">Manage Client</text>
+  <text x="560" y="421" text-anchor="middle" class="small">Create account and client</text>
+  <text x="560" y="443" text-anchor="middle" class="small">access records</text>
+
+  <rect x="420" y="620" width="280" height="105" class="process"/>
+  <text x="445" y="653" class="num">3.0</text>
+  <text x="560" y="653" text-anchor="middle" class="text">Admin Login</text>
+  <text x="560" y="681" text-anchor="middle" class="small">Verify staff credentials</text>
+  <text x="560" y="703" text-anchor="middle" class="small">and open dashboard</text>
+
+  <rect x="835" y="145" width="280" height="105" class="process"/>
+  <text x="860" y="178" class="num">4.0</text>
+  <text x="975" y="178" text-anchor="middle" class="text">Review Appointment</text>
+  <text x="975" y="206" text-anchor="middle" class="small">View pending requests</text>
+  <text x="975" y="228" text-anchor="middle" class="small">and schedule details</text>
+
+  <rect x="835" y="360" width="280" height="105" class="process"/>
+  <text x="860" y="393" class="num">5.0</text>
+  <text x="975" y="393" text-anchor="middle" class="text">Update Status</text>
+  <text x="975" y="421" text-anchor="middle" class="small">Confirm, complete, edit,</text>
+  <text x="975" y="443" text-anchor="middle" class="small">or cancel appointment</text>
+
+  <rect x="835" y="620" width="280" height="105" class="process"/>
+  <text x="860" y="653" class="num">6.0</text>
+  <text x="975" y="653" text-anchor="middle" class="text">Generate Reports</text>
+  <text x="975" y="681" text-anchor="middle" class="small">Appointments, patients,</text>
+  <text x="975" y="703" text-anchor="middle" class="small">staff and summaries</text>
+
+  <rect x="1220" y="145" width="220" height="82" class="store"/>
+  <text x="1330" y="178" text-anchor="middle" class="text">D1 Appointments</text>
+  <text x="1330" y="202" text-anchor="middle" class="small">Booking records</text>
+
+  <rect x="1220" y="320" width="220" height="82" class="store"/>
+  <text x="1330" y="353" text-anchor="middle" class="text">D2 Patients</text>
+  <text x="1330" y="377" text-anchor="middle" class="small">Pet and owner info</text>
+
+  <rect x="1220" y="495" width="220" height="82" class="store"/>
+  <text x="1330" y="528" text-anchor="middle" class="text">D3 Users</text>
+  <text x="1330" y="552" text-anchor="middle" class="small">Admin and client logins</text>
+
+  <rect x="1220" y="670" width="220" height="82" class="store"/>
+  <text x="1330" y="703" text-anchor="middle" class="text">D4 Staff</text>
+  <text x="1330" y="727" text-anchor="middle" class="small">Veterinarian records</text>
+
+  <path d="M300 215 H420" class="arrow"/>
+  <text x="318" y="198" class="flow">Booking form data</text>
+  <path d="M700 198 H835" class="arrow"/>
+  <text x="724" y="180" class="flow">Pending request</text>
+  <path d="M1115 198 H1220" class="arrow"/>
+  <text x="1130" y="180" class="flow">Save booking</text>
+
+  <path d="M300 780 H420" class="arrow"/>
+  <text x="320" y="762" class="flow">Login credentials</text>
+  <path d="M700 672 H835" class="arrow"/>
+  <text x="720" y="654" class="flow">Authorized session</text>
+  <path d="M700 412 H1220" class="arrow"/>
+  <text x="765" y="394" class="flow">Client account data</text>
+
+  <path d="M1220 186 H1115" class="arrow"/>
+  <text x="1130" y="225" class="flow">Appointment list</text>
+  <path d="M975 250 V360" class="arrow"/>
+  <text x="995" y="310" class="flow">Selected request</text>
+  <path d="M1115 412 C1160 410 1175 370 1220 360" class="arrow"/>
+  <text x="1128" y="386" class="flow">Patient update</text>
+  <path d="M1115 412 H1220" class="arrow"/>
+  <text x="1135" y="433" class="flow">Status update</text>
+
+  <path d="M1220 536 H1115" class="arrow"/>
+  <text x="1128" y="518" class="flow">User info</text>
+  <path d="M1115 672 H1220" class="arrow"/>
+  <text x="1130" y="654" class="flow">Staff summary</text>
+  <path d="M975 620 V465" class="arrow"/>
+  <text x="996" y="548" class="flow">Report data</text>
+</svg>
