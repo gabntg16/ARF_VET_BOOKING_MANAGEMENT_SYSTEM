@@ -51,7 +51,8 @@
     @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.04)}}
     .badge{position:absolute;bottom:2rem;left:-1.5rem;background:var(--warm);border-radius:var(--r);padding:1rem 1.25rem;box-shadow:var(--sh-md);border:1px solid var(--border);display:flex;align-items:center;gap:.75rem;min-width:200px;animation:floatA 4s ease-in-out infinite}
     @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-    .badge-icon{width:42px;height:42px;background:#e8f5ee;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .badge-icon{width:42px;height:42px;background:#e8f5ee;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:7px}
+    .badge-icon img{width:100%;height:100%;object-fit:contain}
     .badge-lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
     .badge-val{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);line-height:1}
     .badge2{position:absolute;top:1.5rem;right:-1.5rem;background:var(--sage);border-radius:var(--r);padding:.85rem 1.1rem;box-shadow:var(--sh-md);color:#fff;text-align:center;animation:floatA 4.5s 1s ease-in-out infinite}
@@ -74,7 +75,8 @@
     .svc-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:0;background:var(--sage);border-radius:0 2px 2px 0;transition:height .25s ease}
     .svc-card:hover{border-color:var(--sage-l);box-shadow:var(--sh-md);transform:translateY(-4px)}
     .svc-card:hover::before{height:100%}
-    .svc-icon{width:52px;height:52px;background:var(--amber-l);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.25rem;transition:transform .2s}
+    .svc-icon{width:52px;height:52px;background:var(--amber-l);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;transition:transform .2s;padding:9px}
+    .svc-icon img{width:100%;height:100%;object-fit:contain}
     .svc-card:hover .svc-icon{transform:scale(1.1)}
     .svc-name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--ink);margin-bottom:.5rem}
     .svc-desc2{font-size:.875rem;color:var(--muted);line-height:1.65}
@@ -115,7 +117,8 @@
     .auth-body{color:rgba(255,255,255,.75);font-size:1rem;line-height:1.75;margin-bottom:2rem}
     .auth-feats{display:flex;flex-direction:column;gap:.75rem}
     .auth-feat{display:flex;align-items:flex-start;gap:.75rem;font-size:.9rem;color:rgba(255,255,255,.8)}
-    .auth-feat-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .auth-feat-icon{width:28px;height:28px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px}
+    .auth-feat-icon img{width:100%;height:100%;object-fit:contain}
     .login-card{background:var(--warm);border-radius:var(--rl);padding:2.5rem;box-shadow:var(--sh-lg)}
     .lc-title{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--ink);margin-bottom:.3rem}
     .lc-sub{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
@@ -191,11 +194,11 @@
 <section style="padding:0">
   <div class="hero">
     <div>
-      <div class="hero-eyebrow">🩺 Veterinary Clinic · Est. 2015</div>
+      <div class="hero-eyebrow">Veterinary Clinic - Est. 2015</div>
       <h1 class="hero-title">Expert care for<br/>every <em>furry</em><br/>family member</h1>
       <p class="hero-body">ARF provides compassionate, professional veterinary care for cats, dogs, and small animals. Real-time booking, specialist consultations, and a team that treats your pet like family.</p>
       <div class="hero-actions">
-        <a href="#auth" class="btn-p">📅 Book Appointment</a>
+        <a href="#auth" class="btn-p"><span style="width:18px;height:18px;display:inline-flex"><img src="assets/icons/appointment.png" alt="" style="width:100%;height:100%;object-fit:contain"/></span> Book Appointment</a>
         <a href="#about" class="btn-g">Learn More →</a>
       </div>
       <div class="hero-trust">
@@ -209,7 +212,7 @@
         <img src="assets/images/kho-vet-hero.jpg" alt="KHO Veterinary Clinic staff holding a dog patient" loading="eager"/>
       </div>
       <div class="badge">
-        <div class="badge-icon">🐶</div>
+        <div class="badge-icon"><img src="assets/icons/dog-bone.png" alt=""/></div>
         <div>
           <div class="badge-lbl">Patients Treated</div>
           <div class="badge-val">1,400+</div>
@@ -235,37 +238,37 @@
     </div>
     <div class="svc-grid">
       <div class="svc-card reveal" style="transition-delay:.05s">
-        <div class="svc-icon">🩺</div>
+        <div class="svc-icon"><img src="assets/icons/veterinarian.png" alt=""/></div>
         <div class="svc-name">Wellness Checkups</div>
         <p class="svc-desc2">Annual and bi-annual exams to keep your pet in peak health with full physical assessments.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
       <div class="svc-card reveal" style="transition-delay:.1s">
-        <div class="svc-icon">💉</div>
+        <div class="svc-icon"><img src="assets/icons/appointment.png" alt=""/></div>
         <div class="svc-name">Vaccinations</div>
         <p class="svc-desc2">Core and non-core vaccines tailored to your pet's lifestyle, age, and risk factors.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
       <div class="svc-card reveal" style="transition-delay:.15s">
-        <div class="svc-icon">✂️</div>
+        <div class="svc-icon"><img src="assets/icons/dog-service.png" alt=""/></div>
         <div class="svc-name">Grooming</div>
         <p class="svc-desc2">Full-service grooming including baths, trims, nail clipping, and ear cleaning.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
       <div class="svc-card reveal" style="transition-delay:.2s">
-        <div class="svc-icon">🦷</div>
+        <div class="svc-icon"><img src="assets/icons/cat.png" alt=""/></div>
         <div class="svc-name">Dental Care</div>
         <p class="svc-desc2">Professional dental cleanings, extractions, and oral health assessments.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
       <div class="svc-card reveal" style="transition-delay:.25s">
-        <div class="svc-icon">🔬</div>
+        <div class="svc-icon"><img src="assets/icons/report.png" alt=""/></div>
         <div class="svc-name">Surgery</div>
         <p class="svc-desc2">Soft-tissue surgeries including spay/neuter procedures with full anesthetic monitoring.</p>
         <div class="svc-arrow">Schedule →</div>
       </div>
       <div class="svc-card reveal" style="transition-delay:.3s">
-        <div class="svc-icon">🚨</div>
+        <div class="svc-icon"><img src="assets/icons/pending.png" alt=""/></div>
         <div class="svc-name">Emergency Care</div>
         <p class="svc-desc2">Urgent triage and stabilization during clinic hours for acute illness or trauma.</p>
         <div class="svc-arrow">Schedule →</div>
@@ -340,10 +343,10 @@
         <h2 class="auth-title">Book a visit<br/>without waiting<br/>in line</h2>
         <p class="auth-body">Send an appointment request online. The clinic team will review your preferred schedule and confirm the visit.</p>
         <div class="auth-feats">
-          <div class="auth-feat"><div class="auth-feat-icon">📅</div><div>Choose your preferred date and time</div></div>
-          <div class="auth-feat"><div class="auth-feat-icon">🩺</div><div>Select the service your pet needs</div></div>
-          <div class="auth-feat"><div class="auth-feat-icon">🔔</div><div>Clinic staff can confirm or update the request</div></div>
-          <div class="auth-feat"><div class="auth-feat-icon">📋</div><div>Your request appears in the admin appointment list</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon"><img src="assets/icons/appointment.png" alt=""/></div><div>Choose your preferred date and time</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon"><img src="assets/icons/veterinarian.png" alt=""/></div><div>Select the service your pet needs</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon"><img src="assets/icons/pending.png" alt=""/></div><div>Clinic staff can confirm or update the request</div></div>
+          <div class="auth-feat"><div class="auth-feat-icon"><img src="assets/icons/report.png" alt=""/></div><div>Your request appears in the admin appointment list</div></div>
         </div>
       </div>
       <div class="reveal" style="transition-delay:.1s">
@@ -432,7 +435,7 @@
       <li><a href="#auth">Portal</a></li>
       <li><a href="staff-login.html">Staff sign in</a></li>
     </ul>
-    <small>© 2026 ARF Veterinary Clinic · Pet care done with love 🐾</small>
+    <small>Copyright 2026 ARF Veterinary Clinic - Pet care done with love</small>
   </div>
 </footer>
 
@@ -464,16 +467,16 @@
     }
 
     const emojiBySpecies = {
-      Dog: '🐶',
-      Cat: '🐱',
-      Bird: '🐦',
-      Rabbit: '🐰',
-      Other: '🐾'
+      Dog: 'DG',
+      Cat: 'CT',
+      Bird: 'BD',
+      Rabbit: 'RB',
+      Other: 'PT'
     };
 
     const result = await createAppointmentInDB({
       pet,
-      emoji: emojiBySpecies[species] || '🐾',
+      emoji: emojiBySpecies[species] || 'PT',
       owner,
       phone,
       service,

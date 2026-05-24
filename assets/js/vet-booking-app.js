@@ -34,8 +34,24 @@ function patientMark(record = {}) {
   return 'PT';
 }
 
-function staffMark() {
-  return 'DR';
+function iconImg(src, alt = '') {
+  return `<img src="${src}" alt="${alt}"/>`;
+}
+
+function patientIcon(record = {}) {
+  const mark = patientMark(record);
+  const icons = {
+    CT: ['assets/icons/cat.png', 'Cat'],
+    BD: ['assets/icons/bird.png', 'Bird'],
+    RB: ['assets/icons/rabbit.png', 'Rabbit'],
+    DG: ['assets/icons/dog-bone.png', 'Dog'],
+    PT: ['assets/icons/dog-service.png', 'Pet'],
+  };
+  return iconImg(...icons[mark]);
+}
+
+function staffIcon() {
+  return iconImg('assets/icons/veterinarian.png', 'Veterinarian');
 }
 
 // Load all data from the backend
@@ -157,7 +173,7 @@ function renderDashboard() {
           <div class="appt-time-big" style="color:var(--primary)">${a.time.split(':')[0]}</div>
           <div class="appt-time-sub">${a.time.includes('AM') ? 'AM' : 'PM'}</div>
         </div>
-        <div class="pet-avatar" style="box-shadow:var(--shadow-sm)">${patientMark(a)}</div>
+        <div class="pet-avatar" style="box-shadow:var(--shadow-sm)">${patientIcon(a)}</div>
         <div class="appt-info">
           <div class="appt-pet" style="font-weight:800">${a.pet}</div>
           <div class="appt-owner" style="font-size:0.75rem"><span style="opacity:0.6">Owner:</span> ${a.owner}</div>
@@ -210,7 +226,7 @@ function badgeClass(status) {
 
 function apptRow(a) {
   return `<tr>
-    <td><div class="name-cell" style="display:flex; align-items:center; gap:12px;"><div class="pet-avatar" style="box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex-shrink:0;">${patientMark(a)}</div><div><div class="name-main" style="font-weight:700">${a.pet}</div></div></div></td>
+    <td><div class="name-cell" style="display:flex; align-items:center; gap:12px;"><div class="pet-avatar" style="box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex-shrink:0;">${patientIcon(a)}</div><div><div class="name-main" style="font-weight:700">${a.pet}</div></div></div></td>
     <td><div class="name-main" style="font-weight:600">${a.owner}</div><div class="name-sub" style="font-size:0.75rem">${a.phone}</div></td>
     <td>${a.service}</td>
     <td><div class="name-main" style="color:var(--primary); font-weight:600">${formatDate(a.date)}</div><div class="name-sub" style="font-size:0.75rem">${a.time}</div></td>
@@ -251,7 +267,7 @@ function renderPatientsTable(list) {
   }
   tbody.innerHTML = list.map(p => `
     <tr>
-      <td><div class="name-cell"><div class="pet-avatar">${patientMark(p)}</div><div class="name-main">${p.name}</div></div></td>
+      <td><div class="name-cell"><div class="pet-avatar">${patientIcon(p)}</div><div class="name-main">${p.name}</div></div></td>
       <td>${p.species} - ${p.breed}</td>
       <td>${p.age}</td>
       <td>${p.owner}</td>
@@ -389,7 +405,7 @@ function renderVets() {
   const statusBadge = { Available:'badge-green', 'On Leave':'badge-amber', Inactive:'badge-red' };
   document.getElementById('vets-list').innerHTML = vets.map(v => `
     <div class="vet-card" style="border-radius:12px; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-      <div class="vet-avatar" style="background:var(--green-light);font-size:.82rem; box-shadow:inset 0 2px 4px rgba(0,0,0,0.05)">${staffMark(v)}</div>
+      <div class="vet-avatar" style="background:var(--green-light); box-shadow:inset 0 2px 4px rgba(0,0,0,0.05)">${staffIcon(v)}</div>
       <div style="flex:1">
         <div class="vet-name" style="font-weight:800; color:var(--text)">${v.name}</div>
         <div class="vet-spec" style="font-size:0.75rem; color:var(--muted)">${v.spec}</div>
@@ -528,7 +544,7 @@ function renderReports() {
   const topHTML = patients.length === 0 ? '<div class="empty-state"><div class="emoji">--</div><p>No patient data yet</p></div>' : patients.slice(0,5).map((p,idx) => `
     <div style="display:flex;align-items:center;gap:0.8rem;padding:0.65rem 0;border-bottom:1px solid #f0ede8">
       <div style="font-size:1.1rem;font-weight:800;color:var(--muted);width:1.2rem">${idx+1}</div>
-      <div class="pet-avatar">${patientMark(p)}</div>
+      <div class="pet-avatar">${patientIcon(p)}</div>
       <div style="flex:1"><div style="font-weight:700;font-size:0.84rem">${p.name}</div><div style="font-size:0.72rem;color:var(--muted)">${p.owner}</div></div>
       <span class="badge badge-green">${appointments.filter(a=>a.pet===p.name).length} visits</span>
     </div>

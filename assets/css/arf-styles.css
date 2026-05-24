@@ -97,10 +97,11 @@ body{
   transition:background .18s,color .18s;
 }
 .nav-btn .icon{
-  width:1.35rem;text-align:center;
-  font-size:.68rem;font-weight:800;letter-spacing:0;
-  color:inherit;
+  width:1.35rem;height:1.35rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
 }
+.nav-btn .icon img{width:1.15rem;height:1.15rem;object-fit:contain;filter:saturate(.9)}
 .nav-btn:hover{background:rgba(255,255,255,.08);color:#fff}
 .nav-btn.active{background:rgba(255,255,255,.14);color:#fff;font-weight:600}
 
@@ -183,6 +184,7 @@ body{
 }
 .stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .stat-icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:var(--primary);letter-spacing:0;flex-shrink:0}
+.stat-icon img{width:28px;height:28px;object-fit:contain}
 .stat-value{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--ink)}
 .stat-label{font-size:.72rem;color:var(--muted);font-weight:600;margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em}
 .stat-delta{font-size:.7rem;font-weight:600;margin-top:.25rem}
@@ -223,7 +225,8 @@ tr:hover td{background:#faf8f5}
 .badge-grey{background:#f0ede8;color:var(--muted)}
 
 
-.pet-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;background:var(--primary-light);color:var(--primary);flex-shrink:0;letter-spacing:0}
+.pet-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--primary-light);flex-shrink:0;padding:5px;letter-spacing:0}
+.pet-avatar img{width:100%;height:100%;object-fit:contain}
 .name-cell{display:flex;align-items:center;gap:.65rem}
 .name-main{font-weight:700;font-size:.84rem}
 .name-sub{font-size:.7rem;color:var(--muted)}
@@ -300,7 +303,8 @@ tr:hover td{background:#faf8f5}
 
 .vet-card{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border:1.5px solid var(--border);border-radius:var(--radius);margin-bottom:.65rem;background:var(--white);transition:border-color .2s,box-shadow .2s}
 .vet-card:hover{border-color:var(--primary);box-shadow:0 4px 16px rgba(61,107,79,.1)}
-.vet-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:var(--primary);flex-shrink:0;letter-spacing:0}
+.vet-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;padding:7px;letter-spacing:0}
+.vet-avatar img{width:100%;height:100%;object-fit:contain}
 .vet-name{font-weight:800;font-size:.88rem;color:var(--ink)}
 .vet-spec{font-size:.73rem;color:var(--muted)}
 .vet-status{font-size:.7rem;font-weight:700;margin-top:.25rem}
