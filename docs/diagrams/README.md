@@ -15,4 +15,5 @@ Use these diagrams in Chapter 3, following the same structure used in the SmartS
 11. `arf-use-case-diagram.svg` - Use Case Diagram
 12. `arf-context-diagram.svg` - General System Context Diagram
 13. `arf-pfd.svg` - Process Flow Diagram
-
+14. `arf-role-based-access-diagram.svg` - Role-Based Access Control Diagram
+15. `arf-role-access-matrix.svg` - User Access Matrix

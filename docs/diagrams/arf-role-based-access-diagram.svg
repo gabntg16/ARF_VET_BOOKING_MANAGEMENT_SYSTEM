@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 36px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .system{fill:#3d6b4f;stroke:#254432;stroke-width:4;rx:28}.systemText{font:700 24px Arial,sans-serif;fill:#fff}
+      .role{fill:#fff;stroke:#3d6b4f;stroke-width:3;rx:18}.roleText{font:700 20px Arial,sans-serif;fill:#1f2d24}
+      .module{fill:#fffaf1;stroke:#c8763a;stroke-width:3;rx:14}.moduleText{font:700 16px Arial,sans-serif;fill:#1f2d24}
+      .small{font:500 13px Arial,sans-serif;fill:#637569}.arrow{stroke:#2f4838;stroke-width:3;fill:none;marker-end:url(#arrow)}
+      .label{font:700 13px Arial,sans-serif;fill:#2f4838}.badge{fill:#e8f2eb;stroke:#3d6b4f;stroke-width:2}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4838"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1600" height="1050"/>
+  <text x="800" y="58" text-anchor="middle" class="title">Role-Based Access Control Diagram</text>
+  <text x="800" y="88" text-anchor="middle" class="sub">ARF Vet Booking Management System user roles and permitted modules</text>
+
+  <rect x="590" y="390" width="420" height="210" class="system"/>
+  <text x="800" y="465" text-anchor="middle" class="systemText">ARF Vet Booking</text>
+  <text x="800" y="500" text-anchor="middle" class="systemText">Management System</text>
+  <text x="800" y="540" text-anchor="middle" class="small" fill="#e8f2eb">Authentication checks the user role</text>
+  <text x="800" y="565" text-anchor="middle" class="small" fill="#e8f2eb">before allowing access to modules</text>
+
+  <rect x="80" y="160" width="280" height="110" class="role"/>
+  <circle cx="122" cy="215" r="22" class="badge"/><text x="122" y="222" text-anchor="middle" class="small">CU</text>
+  <text x="222" y="205" text-anchor="middle" class="roleText">Customer</text>
+  <text x="222" y="234" text-anchor="middle" class="small">Public client user</text>
+
+  <rect x="80" y="730" width="280" height="110" class="role"/>
+  <circle cx="122" cy="785" r="22" class="badge"/><text x="122" y="792" text-anchor="middle" class="small">FD</text>
+  <text x="222" y="775" text-anchor="middle" class="roleText">Front Desk Staff</text>
+  <text x="222" y="804" text-anchor="middle" class="small">Daily appointment encoder</text>
+
+  <rect x="1240" y="160" width="280" height="110" class="role"/>
+  <circle cx="1282" cy="215" r="22" class="badge"/><text x="1282" y="222" text-anchor="middle" class="small">AD</text>
+  <text x="1382" y="205" text-anchor="middle" class="roleText">Admin / Owner</text>
+  <text x="1382" y="234" text-anchor="middle" class="small">Full system access</text>
+
+  <rect x="1240" y="730" width="280" height="110" class="role"/>
+  <circle cx="1282" cy="785" r="22" class="badge"/><text x="1282" y="792" text-anchor="middle" class="small">VT</text>
+  <text x="1382" y="775" text-anchor="middle" class="roleText">Veterinarian</text>
+  <text x="1382" y="804" text-anchor="middle" class="small">Clinical service user</text>
+
+  <rect x="455" y="125" width="210" height="70" class="module"/><text x="560" y="153" text-anchor="middle" class="moduleText">Book Appointment</text><text x="560" y="176" text-anchor="middle" class="small">Customer form</text>
+  <rect x="705" y="125" width="210" height="70" class="module"/><text x="810" y="153" text-anchor="middle" class="moduleText">Booking Status</text><text x="810" y="176" text-anchor="middle" class="small">Client dashboard</text>
+  <rect x="955" y="125" width="210" height="70" class="module"/><text x="1060" y="153" text-anchor="middle" class="moduleText">Login</text><text x="1060" y="176" text-anchor="middle" class="small">Staff authentication</text>
+
+  <rect x="450" y="800" width="220" height="70" class="module"/><text x="560" y="828" text-anchor="middle" class="moduleText">Appointments</text><text x="560" y="851" text-anchor="middle" class="small">Review and update</text>
+  <rect x="710" y="800" width="220" height="70" class="module"/><text x="820" y="828" text-anchor="middle" class="moduleText">Patient Records</text><text x="820" y="851" text-anchor="middle" class="small">View and manage</text>
+  <rect x="970" y="800" width="220" height="70" class="module"/><text x="1080" y="828" text-anchor="middle" class="moduleText">Reports</text><text x="1080" y="851" text-anchor="middle" class="small">Dashboard summaries</text>
+
+  <rect x="690" y="675" width="220" height="70" class="module"/><text x="800" y="703" text-anchor="middle" class="moduleText">Staff / Settings</text><text x="800" y="726" text-anchor="middle" class="small">Admin only</text>
+
+  <path d="M360 215 C460 240 520 330 590 430" class="arrow"/>
+  <path d="M360 785 C475 740 540 650 615 575" class="arrow"/>
+  <path d="M1240 215 C1140 250 1080 335 1010 430" class="arrow"/>
+  <path d="M1240 785 C1125 740 1060 650 985 575" class="arrow"/>
+
+  <path d="M690 390 C640 310 600 240 560 195" class="arrow"/>
+  <path d="M800 390 V195" class="arrow"/>
+  <path d="M900 390 C945 300 1000 235 1060 195" class="arrow"/>
+  <path d="M700 600 C645 690 600 750 560 800" class="arrow"/>
+  <path d="M800 600 V800" class="arrow"/>
+  <path d="M900 600 C960 690 1025 750 1080 800" class="arrow"/>
+  <path d="M800 600 V675" class="arrow"/>
+
+  <text x="400" y="300" class="label">can request and track</text>
+  <text x="1115" y="300" class="label">can manage all modules</text>
+  <text x="405" y="700" class="label">can manage daily records</text>
+  <text x="1115" y="700" class="label">can view clinical records</text>
+</svg>

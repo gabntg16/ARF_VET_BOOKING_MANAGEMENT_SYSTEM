@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1050" viewBox="0 0 1600 1050">
+  <defs>
+    <style>
+      .bg{fill:#f6f3ee}.title{font:700 36px Arial,sans-serif;fill:#1f2d24}.sub{font:500 16px Arial,sans-serif;fill:#637569}
+      .table{fill:#fff;stroke:#d8e4dc;stroke-width:3}.head{fill:#3d6b4f}.module{fill:#eef6f0}.admin{fill:#fffaf1}
+      .htext{font:700 16px Arial,sans-serif;fill:#fff}.text{font:700 15px Arial,sans-serif;fill:#1f2d24}.small{font:500 13px Arial,sans-serif;fill:#637569}
+      .yes{fill:#3d6b4f;font:700 18px Arial,sans-serif}.partial{fill:#c8763a;font:700 18px Arial,sans-serif}.no{fill:#9aa7a0;font:700 18px Arial,sans-serif}
+      .line{stroke:#d8e4dc;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="1050"/>
+  <text x="800" y="58" text-anchor="middle" class="title">User Access Matrix</text>
+  <text x="800" y="88" text-anchor="middle" class="sub">Role permissions for ARF Vet Booking Management System modules</text>
+
+  <rect x="130" y="145" width="1340" height="760" class="table"/>
+  <rect x="130" y="145" width="1340" height="70" class="head"/>
+  <rect x="130" y="215" width="320" height="690" class="module"/>
+  <text x="290" y="188" text-anchor="middle" class="htext">Module / Function</text>
+  <text x="565" y="188" text-anchor="middle" class="htext">Customer</text>
+  <text x="805" y="188" text-anchor="middle" class="htext">Front Desk Staff</text>
+  <text x="1045" y="188" text-anchor="middle" class="htext">Veterinarian</text>
+  <text x="1285" y="188" text-anchor="middle" class="htext">Admin / Owner</text>
+
+  <g>
+    <line x1="450" y1="145" x2="450" y2="905" class="line"/>
+    <line x1="680" y1="145" x2="680" y2="905" class="line"/>
+    <line x1="930" y1="145" x2="930" y2="905" class="line"/>
+    <line x1="1160" y1="145" x2="1160" y2="905" class="line"/>
+    <line x1="130" y1="295" x2="1470" y2="295" class="line"/>
+    <line x1="130" y1="375" x2="1470" y2="375" class="line"/>
+    <line x1="130" y1="455" x2="1470" y2="455" class="line"/>
+    <line x1="130" y1="535" x2="1470" y2="535" class="line"/>
+    <line x1="130" y1="615" x2="1470" y2="615" class="line"/>
+    <line x1="130" y1="695" x2="1470" y2="695" class="line"/>
+    <line x1="130" y1="775" x2="1470" y2="775" class="line"/>
+    <line x1="130" y1="855" x2="1470" y2="855" class="line"/>
+  </g>
+
+  <text x="155" y="260" class="text">Book Appointment</text>
+  <text x="155" y="340" class="text">View Own Booking Status</text>
+  <text x="155" y="420" class="text">Staff Login / Dashboard</text>
+  <text x="155" y="500" class="text">Manage Appointments</text>
+  <text x="155" y="580" class="text">Manage Patient Records</text>
+  <text x="155" y="660" class="text">Manage Client Accounts</text>
+  <text x="155" y="740" class="text">Manage Staff / Settings</text>
+  <text x="155" y="820" class="text">View Reports and Analytics</text>
+  <text x="155" y="890" class="text">Update Clinical Notes</text>
+
+  <text x="565" y="260" text-anchor="middle" class="yes">Yes</text>
+  <text x="805" y="260" text-anchor="middle" class="no">No</text>
+  <text x="1045" y="260" text-anchor="middle" class="no">No</text>
+  <text x="1285" y="260" text-anchor="middle" class="no">No</text>
+
+  <text x="565" y="340" text-anchor="middle" class="yes">Yes</text>
+  <text x="805" y="340" text-anchor="middle" class="partial">All</text>
+  <text x="1045" y="340" text-anchor="middle" class="partial">Assigned</text>
+  <text x="1285" y="340" text-anchor="middle" class="yes">All</text>
+
+  <text x="565" y="420" text-anchor="middle" class="no">No</text>
+  <text x="805" y="420" text-anchor="middle" class="yes">Yes</text>
+  <text x="1045" y="420" text-anchor="middle" class="yes">Yes</text>
+  <text x="1285" y="420" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="500" text-anchor="middle" class="no">No</text>
+  <text x="805" y="500" text-anchor="middle" class="yes">Yes</text>
+  <text x="1045" y="500" text-anchor="middle" class="partial">Assigned</text>
+  <text x="1285" y="500" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="580" text-anchor="middle" class="no">No</text>
+  <text x="805" y="580" text-anchor="middle" class="yes">Yes</text>
+  <text x="1045" y="580" text-anchor="middle" class="partial">View</text>
+  <text x="1285" y="580" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="660" text-anchor="middle" class="no">No</text>
+  <text x="805" y="660" text-anchor="middle" class="yes">Yes</text>
+  <text x="1045" y="660" text-anchor="middle" class="no">No</text>
+  <text x="1285" y="660" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="740" text-anchor="middle" class="no">No</text>
+  <text x="805" y="740" text-anchor="middle" class="no">No</text>
+  <text x="1045" y="740" text-anchor="middle" class="no">No</text>
+  <text x="1285" y="740" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="820" text-anchor="middle" class="no">No</text>
+  <text x="805" y="820" text-anchor="middle" class="partial">Limited</text>
+  <text x="1045" y="820" text-anchor="middle" class="no">No</text>
+  <text x="1285" y="820" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="565" y="890" text-anchor="middle" class="no">No</text>
+  <text x="805" y="890" text-anchor="middle" class="no">No</text>
+  <text x="1045" y="890" text-anchor="middle" class="yes">Yes</text>
+  <text x="1285" y="890" text-anchor="middle" class="yes">Yes</text>
+
+  <text x="800" y="965" text-anchor="middle" class="small">Legend: Yes = full access, View/Assigned/Limited = restricted access, No = no access.</text>
+</svg>
