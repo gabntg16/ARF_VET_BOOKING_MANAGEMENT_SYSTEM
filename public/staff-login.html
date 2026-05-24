@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Staff Sign In - ARF Veterinary Clinic</title>
+  <link rel="icon" type="image/png" href="assets/images/arf-logo-card-512.png"/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -22,7 +23,7 @@
     }
     .shell{width:min(440px,100%)}
     .brand{display:flex;align-items:center;gap:.8rem;margin-bottom:1.3rem}
-    .brand-mark{width:44px;height:44px;border-radius:12px;background:var(--sage);display:grid;place-items:center;color:#fff;font-size:1.2rem}
+    .brand-mark{width:54px;height:54px;border-radius:14px;object-fit:cover;box-shadow:0 8px 20px rgba(30,42,34,.14);border:1px solid var(--border);background:#fff}
     .brand-name{font-family:'DM Serif Display',serif;font-size:1.35rem;line-height:1}
     .brand-sub{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:.2rem}
     .card{
@@ -69,7 +70,7 @@
 <body>
   <main class="shell">
     <div class="brand">
-      <div class="brand-mark">ARF</div>
+      <img class="brand-mark" src="assets/images/arf-logo-card-512.png" alt="ARF Portal logo"/>
       <div>
         <div class="brand-name">ARF</div>
         <div class="brand-sub">Animal Relief Facility</div>
