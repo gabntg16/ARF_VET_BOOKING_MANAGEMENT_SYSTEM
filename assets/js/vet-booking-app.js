@@ -20,6 +20,11 @@ let appointments = [];
 let patients = [];
 let vets = [];
 let currentFilter = 'all';
+let adminSettings = {
+  adminPassword: 'admin123',
+  clinicName: 'ARF - Animal Relief Facility',
+  clinicPhone: '+63 2 8123 4567'
+};
 
 function hasBrokenEncoding(value) {
   return typeof value === 'string' && /[\u00f0\u00c3\u00e2]/.test(value);
@@ -60,6 +65,7 @@ async function loadDataFromBackend() {
     appointments = await getAppointmentsFromDB();
     patients = await getPatientsFromDB();
     vets = await getVetsFromDB();
+    adminSettings = await getAdminSettingsFromDB() || adminSettings;
 
     // If no data exists, load defaults
     if (appointments.length === 0) {
@@ -146,10 +152,64 @@ function navigate(page, btn) {
   if (page === 'vets') renderVets();
   if (page === 'reports') renderReports();
   if (page === 'clients') renderClientsPage();
+  if (page === 'settings') renderSettings();
   if (page === 'book') {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('f-date').value = today;
   }
+}
+
+function renderSettings() {
+  const clinicNameInput = document.getElementById('settings-clinic-name');
+  const clinicPhoneInput = document.getElementById('settings-clinic-phone');
+  const adminPasswordInput = document.getElementById('settings-admin-password');
+
+  if (clinicNameInput) clinicNameInput.value = adminSettings.clinicName || 'ARF - Animal Relief Facility';
+  if (clinicPhoneInput) clinicPhoneInput.value = adminSettings.clinicPhone || '+63 2 8123 4567';
+  if (adminPasswordInput) adminPasswordInput.value = '';
+}
+
+async function saveClinicSettings() {
+  const clinicName = document.getElementById('settings-clinic-name')?.value.trim();
+  const clinicPhone = document.getElementById('settings-clinic-phone')?.value.trim();
+
+  adminSettings = {
+    ...adminSettings,
+    clinicName: clinicName || 'ARF - Animal Relief Facility',
+    clinicPhone: clinicPhone || '+63 2 8123 4567'
+  };
+
+  const result = await saveAdminSettingsInDB(adminSettings);
+  if (!result.success) {
+    showToast(result.message || 'Error saving settings', 'red');
+    return;
+  }
+
+  showToast('Clinic settings saved!');
+}
+
+async function saveAdminAccess() {
+  const passwordInput = document.getElementById('settings-admin-password');
+  const newPassword = passwordInput?.value.trim();
+
+  if (!newPassword) {
+    showToast('Enter a new admin password first', 'yellow');
+    return;
+  }
+
+  adminSettings = {
+    ...adminSettings,
+    adminPassword: newPassword
+  };
+
+  const result = await saveAdminSettingsInDB(adminSettings);
+  if (!result.success) {
+    showToast(result.message || 'Error updating admin password', 'red');
+    return;
+  }
+
+  passwordInput.value = '';
+  showToast('Admin password updated!');
 }
 
 //  RENDER DASHBOARD

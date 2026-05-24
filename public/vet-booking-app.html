@@ -446,11 +446,11 @@
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">Clinic Name</label>
-                <input class="form-input" value="ARF - Animal Relief Facility"/>
+                <input class="form-input" id="settings-clinic-name" value="ARF - Animal Relief Facility"/>
               </div>
               <div class="form-group">
                 <label class="form-label">Phone</label>
-                <input class="form-input" value="+63 2 8123 4567"/>
+                <input class="form-input" id="settings-clinic-phone" value="+63 2 8123 4567"/>
               </div>
               <div class="form-group" style="grid-column:1/-1">
                 <label class="form-label">Address</label>
@@ -465,7 +465,23 @@
                 <input class="form-input" type="time" value="18:00"/>
               </div>
             </div>
-            <button class="btn btn-primary" style="margin-top:1rem" onclick="showToast('Settings saved!')">Save Changes</button>
+            <button class="btn btn-primary" style="margin-top:1rem" onclick="saveClinicSettings()">Save Changes</button>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:1rem">
+          <div class="card-header"><div class="card-title">Admin Access</div></div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Admin ID</label>
+                <input class="form-input" value="admin" readonly/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">New Admin Password</label>
+                <input class="form-input" id="settings-admin-password" type="password" placeholder="Enter new password"/>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="margin-top:1rem" onclick="saveAdminAccess()">Update Admin Password</button>
           </div>
         </div>
         <div class="card">
