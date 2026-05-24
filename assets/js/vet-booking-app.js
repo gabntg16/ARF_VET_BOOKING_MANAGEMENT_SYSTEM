@@ -248,9 +248,16 @@ function renderDashboard() {
   const todayAppts = appointments.filter(a => a.date === today);
 
   // Stats
+  const activeVets = vets.filter(v => v.status === 'Available');
+  const dutyLabel = activeVets.length === vets.length && vets.length > 0
+    ? 'All available'
+    : `${activeVets.length} of ${vets.length} available`;
+
   document.getElementById('stat-today').textContent = todayAppts.length;
   document.getElementById('stat-patients').textContent = patients.length;
   document.getElementById('stat-pending').textContent = appointments.filter(a => a.status === 'Pending').length;
+  document.getElementById('stat-vets-duty').textContent = activeVets.length;
+  document.getElementById('stat-vets-duty-label').textContent = vets.length ? dutyLabel : 'No staff listed';
 
   // Today's schedule
   const sched = document.getElementById('today-schedule');
@@ -522,6 +529,7 @@ function toggleVetStatus(id) {
   updateVetInDB(id, { ...v, status: newStatus }).then(() => {
     loadDataFromBackend().then(() => {
       renderVets();
+      renderDashboard();
       showToast(`Updated ${v.name} to ${newStatus}`);
     });
   }).catch(error => {
@@ -536,6 +544,7 @@ function removeVet(id) {
   deleteVetFromDB(id).then(() => {
     loadDataFromBackend().then(() => {
       renderVets();
+      renderDashboard();
       showToast('Staff member removed');
     });
   }).catch(error => {
@@ -563,6 +572,7 @@ function addVet() {
     loadDataFromBackend().then(() => {
       renderVets();
       refreshVetSelects(name);
+      renderDashboard();
       showToast(`${name} added to staff!`);
     });
     ['mv-name','mv-spec','mv-phone'].forEach(id => document.getElementById(id).value='');
