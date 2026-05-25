@@ -200,6 +200,16 @@ body{
 .card-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .card-title{font-weight:700;font-size:.9rem;color:var(--ink)}
 .card-body{padding:1.1rem 1.25rem}
+.notification-list{display:flex;flex-direction:column;gap:.75rem}
+.notification-item{display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:flex-start;padding:.85rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--cream)}
+.notification-dot{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;flex-shrink:0}
+.notification-dot.amber{background:var(--amber-light);color:var(--amber)}
+.notification-dot.green{background:var(--green-light);color:var(--green)}
+.notification-dot.blue{background:var(--blue-light);color:var(--blue)}
+.notification-dot.red{background:var(--red-light);color:var(--red)}
+.notification-title{font-weight:800;color:var(--ink);font-size:.86rem;margin-bottom:.12rem}
+.notification-text{font-size:.78rem;color:var(--muted);line-height:1.45}
+.notification-meta{font-size:.7rem;color:var(--muted);font-weight:700;margin-top:.35rem}
 
 
 .table-wrap{overflow-x:auto}

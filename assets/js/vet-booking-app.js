@@ -258,6 +258,7 @@ function renderDashboard() {
   document.getElementById('stat-pending').textContent = appointments.filter(a => a.status === 'Pending').length;
   document.getElementById('stat-vets-duty').textContent = activeVets.length;
   document.getElementById('stat-vets-duty-label').textContent = vets.length ? dutyLabel : 'No staff listed';
+  renderAdminNotifications(today, todayAppts);
 
   // Today's schedule
   const sched = document.getElementById('today-schedule');
@@ -314,6 +315,92 @@ function renderCal() {
     html += `<div class="cal-day ${isToday ? 'today' : ''} ${hasAppt ? 'has-appt' : ''}">${d}</div>`;
   }
   cal.innerHTML = html;
+}
+
+function renderAdminNotifications(today, todayAppts) {
+  const box = document.getElementById('admin-notifications');
+  if (!box) return;
+
+  const pending = appointments.filter(a => a.status === 'Pending');
+  const confirmedToday = todayAppts.filter(a => a.status === 'Confirmed');
+  const noVetAssigned = appointments.filter(a => !a.vet || a.vet === 'Any available veterinarian');
+  const unavailableStaff = vets.filter(v => v.status !== 'Available');
+  const upcoming = appointments
+    .filter(a => a.date && a.date > today && a.status === 'Confirmed')
+    .sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+
+  const notices = [];
+
+  if (pending.length) {
+    notices.push({
+      tone: 'amber',
+      mark: '!',
+      title: `${pending.length} appointment${pending.length === 1 ? '' : 's'} need confirmation`,
+      text: 'Review pending client requests and update their status.',
+      meta: pending.slice(0, 3).map(a => `${a.pet} - ${a.date} ${a.time}`).join(' | ')
+    });
+  }
+
+  if (confirmedToday.length) {
+    notices.push({
+      tone: 'green',
+      mark: 'OK',
+      title: `${confirmedToday.length} confirmed visit${confirmedToday.length === 1 ? '' : 's'} today`,
+      text: 'Prepare patient records and assigned veterinarian schedules.',
+      meta: confirmedToday.slice(0, 3).map(a => `${a.time} - ${a.pet}`).join(' | ')
+    });
+  }
+
+  if (noVetAssigned.length) {
+    notices.push({
+      tone: 'blue',
+      mark: 'i',
+      title: `${noVetAssigned.length} booking${noVetAssigned.length === 1 ? '' : 's'} need vet assignment`,
+      text: 'Assign a specific veterinarian when clinic availability is confirmed.',
+      meta: noVetAssigned.slice(0, 3).map(a => `${a.pet} - ${a.service}`).join(' | ')
+    });
+  }
+
+  if (unavailableStaff.length) {
+    notices.push({
+      tone: 'red',
+      mark: 'x',
+      title: `${unavailableStaff.length} staff member${unavailableStaff.length === 1 ? '' : 's'} not available`,
+      text: 'Check staff status before confirming appointment schedules.',
+      meta: unavailableStaff.slice(0, 3).map(v => `${v.name}: ${v.status}`).join(' | ')
+    });
+  }
+
+  if (!notices.length && upcoming.length) {
+    notices.push({
+      tone: 'blue',
+      mark: 'i',
+      title: 'No urgent items',
+      text: 'Upcoming confirmed appointments are scheduled and ready for monitoring.',
+      meta: `${upcoming[0].date} ${upcoming[0].time} - ${upcoming[0].pet}`
+    });
+  }
+
+  if (!notices.length) {
+    notices.push({
+      tone: 'green',
+      mark: 'OK',
+      title: 'All clear',
+      text: 'No pending appointment requests or schedule issues need attention right now.',
+      meta: 'Dashboard is up to date'
+    });
+  }
+
+  box.innerHTML = notices.map(item => `
+    <div class="notification-item">
+      <div class="notification-dot ${item.tone}">${item.mark}</div>
+      <div>
+        <div class="notification-title">${htmlText(item.title)}</div>
+        <div class="notification-text">${htmlText(item.text)}</div>
+        <div class="notification-meta">${htmlText(item.meta)}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 //  APPOINTMENTS TABLE

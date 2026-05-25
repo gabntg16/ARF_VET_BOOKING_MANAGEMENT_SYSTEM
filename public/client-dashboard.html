@@ -352,6 +352,17 @@
     </div>
   </div>
 
+  <!-- NOTIFICATIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Notifications</div>
+        <div style="font-size:0.88rem;color:var(--muted)">Important updates about your account and appointments.</div>
+      </div>
+    </div>
+    <div class="notification-list" id="client-notifications"></div>
+  </div>
+
   <!-- NEW APPOINTMENT REQUEST -->
   <div class="section">
     <div class="section-header">
@@ -487,6 +498,101 @@ function showRequestAlert(message, type = 'error') {
   alert.className = `form-alert show ${type}`;
 }
 
+function htmlText(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function renderClientNotifications(appointments) {
+  const box = document.getElementById('client-notifications');
+  if (!box) return;
+
+  const today = new Date().toISOString().split('T')[0];
+  const pending = appointments.filter(a => a.status === 'Pending');
+  const confirmed = appointments
+    .filter(a => a.status === 'Confirmed' && a.date >= today)
+    .sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+  const cancelled = appointments.filter(a => a.status === 'Cancelled');
+  const notices = [];
+
+  if (currentClient.expiryDate) {
+    const daysLeft = Math.ceil((new Date(currentClient.expiryDate) - new Date(today)) / (1000 * 60 * 60 * 24));
+    if (daysLeft < 0) {
+      notices.push({
+        tone: 'red',
+        mark: 'x',
+        title: 'Account expired',
+        text: 'Please contact the clinic staff to renew your client account.',
+        meta: `Expired on ${currentClient.expiryDate}`
+      });
+    } else if (daysLeft <= 7) {
+      notices.push({
+        tone: 'amber',
+        mark: '!',
+        title: 'Account expiring soon',
+        text: 'Your client account is close to its expiry date.',
+        meta: `${daysLeft} day${daysLeft === 1 ? '' : 's'} remaining`
+      });
+    }
+  }
+
+  if (pending.length) {
+    notices.push({
+      tone: 'amber',
+      mark: '!',
+      title: `${pending.length} appointment request${pending.length === 1 ? '' : 's'} waiting for confirmation`,
+      text: 'The clinic team will review your request and update the status soon.',
+      meta: pending.slice(0, 3).map(a => `${a.service} - ${a.date} ${a.time}`).join(' | ')
+    });
+  }
+
+  if (confirmed.length) {
+    notices.push({
+      tone: 'green',
+      mark: 'OK',
+      title: 'Upcoming confirmed appointment',
+      text: `Your next confirmed visit is for ${confirmed[0].pet || 'your pet'}.`,
+      meta: `${confirmed[0].date} at ${confirmed[0].time} - ${confirmed[0].service}`
+    });
+  }
+
+  if (cancelled.length) {
+    notices.push({
+      tone: 'red',
+      mark: 'x',
+      title: `${cancelled.length} cancelled appointment${cancelled.length === 1 ? '' : 's'}`,
+      text: 'Please request a new schedule if your pet still needs a visit.',
+      meta: cancelled.slice(0, 3).map(a => `${a.service} - ${a.date}`).join(' | ')
+    });
+  }
+
+  if (!notices.length) {
+    notices.push({
+      tone: 'blue',
+      mark: 'i',
+      title: 'No urgent notifications',
+      text: 'You have no pending appointment updates right now.',
+      meta: 'Your dashboard is up to date'
+    });
+  }
+
+  box.innerHTML = notices.map(item => `
+    <div class="notification-item">
+      <div class="notification-dot ${item.tone}">${item.mark}</div>
+      <div>
+        <div class="notification-title">${htmlText(item.title)}</div>
+        <div class="notification-text">${htmlText(item.text)}</div>
+        <div class="notification-meta">${htmlText(item.meta)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
 async function submitClientAppointment() {
   const submitButton = document.getElementById('request-submit');
   const service = document.getElementById('request-service').value;
@@ -535,6 +641,7 @@ async function submitClientAppointment() {
 function renderBookings(clientEmail) {
   getClientAppointmentsFromDB(clientEmail).then(appointments => {
     const bookingsList = document.getElementById('bookings-list');
+    renderClientNotifications(appointments);
 
     if (appointments.length === 0) {
       bookingsList.innerHTML = `
